@@ -1,0 +1,2652 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pandas & Data Manipulation Masterclass | The Codiation Club (TCC NEU)</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- KaTeX CSS & JS for Math Formula Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Custom Style and Script -->
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <div id="app-container">
+        <!-- Top Navigation Bar -->
+        <header class="top-navbar">
+            <div class="brand-logo">
+                <img src="Logo TCC.png" alt="TCC Logo" style="height: 28px; width: auto;">
+                <span>THE CODIATION CLUB</span>
+                <span class="brand-badge">NEU IT • Pandas Masterclass</span>
+            </div>
+
+            <div class="nav-actions">
+                <button id="toc-btn" class="btn-icon" title="Mục lục bài học">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="8" y1="6" x2="21" y2="6" />
+                        <line x1="8" y1="12" x2="21" y2="12" />
+                        <line x1="8" y1="18" x2="21" y2="18" />
+                        <line x1="3" y1="6" x2="3.01" y2="6" />
+                        <line x1="3" y1="12" x2="3.01" y2="12" />
+                        <line x1="3" y1="18" x2="3.01" y2="18" />
+                    </svg>
+                    <span>Mục Lục</span>
+                </button>
+
+                <button id="fullscreen-btn" class="btn-icon" title="Toàn màn hình (F)">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                    </svg>
+                    <span>Toàn Màn Hình</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <!-- Slide Deck Viewport -->
+        <div class="deck-viewport">
+
+            <!-- ==================== SLIDE 1: HERO COVER SLIDE ==================== -->
+            <section class="slide hero-slide active" id="slide-1">
+                <div class="hero-logos">
+                    <div class="hero-logo-card" title="Trường Đại học Kinh tế Quốc dân (NEU)">
+                        <img src="Logo NEU.png" alt="Logo NEU" class="hero-logo-img">
+                    </div>
+                    <div class="hero-logo-card hero-logo-card-main" title="The Codiation Club - CLB Kỹ Thuật Phần Mềm">
+                        <img src="Logo TCC.png" alt="Logo TCC" class="hero-logo-img hero-logo-main">
+                    </div>
+                    <div class="hero-logo-card" title="Khoa Công Nghệ Thông Tin - NEU IT">
+                        <img src="Logo IT.png" alt="Logo Khoa IT" class="hero-logo-img">
+                    </div>
+                </div>
+
+                <div class="hero-org-tag">
+                    CLB KỸ THUẬT PHẦN MỀM - THE CODIATION CLUB (TCC) • KHOA IT - NEU
+                </div>
+
+                <h1 class="hero-title">PANDAS & DATA MANIPULATION</h1>
+                <p class="hero-subtitle">
+                    Làm Chủ Series, DataFrame, Lọc & Thống Kê, Xử Lý Dữ Liệu Lớn & Chuẩn Hóa Thực Chiến Trong Python
+                </p>
+
+                <div class="hero-meta">
+                    <div class="hero-chip">Đơn vị tổ chức: The Codiation Club (TCC)</div>
+                    <div class="hero-chip">Trường Đại học Kinh tế Quốc dân (NEU)</div>
+                    <div class="hero-chip">Khoa Công Nghệ Thông Tin (NEU IT)</div>
+                </div>
+
+                <button onclick="document.getElementById('next-btn').click()" class="btn-primary btn-hero-start">
+                    Bắt Đầu Bài Học
+                </button>
+            </section>
+
+
+            <!-- ==================== SLIDE 2: COURSE ROADMAP ==================== -->
+            <div class="slide" id="slide-2">
+                <div class="slide-header">
+                    <span class="slide-tag">Tổng Quan Lộ Trình</span>
+                    <h2 class="slide-title">Bản Đồ Kiến Thức: Chinh Phục Pandas Toàn Diện</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Phần 1: Nền Tảng & Thao Tác Cốt Lõi (Pandas 1)</h4>
+                            <ul class="feature-list">
+                                <li><strong>Kiến trúc cốt lõi:</strong> Bản chất Series (1D) và DataFrame (2D), trục
+                                    hàng/cột (axis 0 vs 1).</li>
+                                <li><strong>Đọc & Ghi dữ liệu (I/O):</strong> Đọc CSV, Excel, TSV; xuất dữ liệu sạch
+                                    không lẫn index thừa.</li>
+                                <li><strong>Kiểm tra & Khám phá (EDA):</strong> head, tail, shape, info, describe, kiểu
+                                    dữ liệu dtypes.</li>
+                                <li><strong>Truy cập & Cắt lát (Slicing):</strong> Phân biệt tường minh <code>loc</code>
+                                    (nhãn) và <code>iloc</code> (chỉ số).</li>
+                                <li><strong>Lọc nâng cao (Filtering):</strong> Boolean indexing với toán tử bitwise
+                                    <code>&amp;</code>, <code>|</code>, <code>~</code>.
+                                </li>
+                                <li><strong>Xử lý chuỗi &amp; Regex:</strong> Truy xuất <code>.str</code>, lọc biểu thức
+                                    chính quy với cờ <code>re.I</code>.</li>
+                                <li><strong>Thống kê Gom nhóm (GroupBy):</strong> Cơ chế Split-Apply-Combine, đa chiều
+                                    và đa hàm tính toán.</li>
+                            </ul>
+                        </div>
+
+                        <div class="content-box">
+                            <h4>Phần 2: Kỹ Thuật Nâng Cao & Tối Ưu Thực Chiến (Pandas 2)</h4>
+                            <ul class="feature-list">
+                                <li><strong>Tối ưu hóa bộ nhớ RAM:</strong> Đo lường deep memory usage, ép kiểu
+                                    <code>category</code> giảm 80% RAM.
+                                </li>
+                                <li><strong>Xử lý dữ liệu lớn (Big Data):</strong> Tải chọn lọc cột
+                                    <code>usecols</code>, đọc theo khối <code>chunksize</code> streaming.
+                                </li>
+                                <li><strong>Làm sạch dữ liệu khuyết thiếu:</strong> Phát hiện <code>isna()</code>, xóa
+                                    bỏ <code>dropna()</code>, điền bù <code>fillna()</code> và
+                                    <code>interpolate()</code>.
+                                </li>
+                                <li><strong>Tái định hình cấu trúc bảng:</strong> <code>unstack()</code> cho MultiIndex,
+                                    <code>melt()</code> biến đổi Wide-to-Long, bảng tổng hợp <code>pivot_table()</code>.
+                                </li>
+                                <li><strong>Rời rạc hóa (Binning):</strong> Chuyển biến liên tục thành nhóm phân loại
+                                    với <code>pd.cut()</code>.</li>
+                                <li><strong>Hợp nhất dữ liệu:</strong> <code>pd.concat()</code> theo hàng và theo cột.
+                                </li>
+                                <li><strong>33 Bài tập thực chiến:</strong> Phân tích và giải quyết các câu hỏi thực tế
+                                    trong phỏng vấn Data Analyst / Scientist.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <strong>Nguyên lý học tập:</strong> Mỗi slide lý thuyết đều đi kèm <strong>Code mẫu thực thi
+                            thực tế</strong> trên tập dữ liệu <code>Pokemon.csv</code> (800 dòng, 13 cột) và <strong>Màn
+                            hình Terminal Output chính xác</strong>.
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 3: WHAT & WHY PANDAS ==================== -->
+            <div class="slide" id="slide-3">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 1: Giới Thiệu</span>
+                    <h2 class="slide-title">Pandas Là Gì? Tại Sao Cần Dùng Pandas?</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Bản Chất Thư Viện Pandas</h4>
+                            <p style="margin-bottom: 12px;"><strong>Pandas</strong> (viết tắt từ <em>Python Data
+                                    Analysis Library</em>) là thư viện mã nguồn mở hàng đầu thế giới được xây dựng trên
+                                nền móng của <strong>NumPy</strong>, cung cấp các cấu trúc dữ liệu hiệu năng cao và các
+                                công cụ trực quan để phân tích dữ liệu dạng bảng.</p>
+                            <ul class="feature-list">
+                                <li><strong>4 Trụ cột cốt lõi:</strong> Analyzing (Phân tích), Cleaning (Làm sạch),
+                                    Exploring (Khám phá), Manipulating (Biến đổi).</li>
+                                <li><strong>Hiệu năng C/Cython:</strong> Các phép toán cột được tối ưu hóa ở tầng mã
+                                    máy, nhanh hơn hàng trăm lần so với vòng lặp <code>for</code> thuần Python.</li>
+                                <li><strong>Hệ sinh thái kết nối chặt chẽ:</strong> Tương thích hoàn hảo với NumPy,
+                                    Matplotlib, Seaborn, Scikit-learn, TensorFlow và PyTorch.</li>
+                            </ul>
+                        </div>
+
+                        <div class="content-box">
+                            <h4>So Sánh Pandas Với Các Công Cụ Khác</h4>
+                            <table class="styled-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tiêu chí</th>
+                                        <th>Excel</th>
+                                        <th>SQL</th>
+                                        <th>Pandas (Python)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Quy mô dữ liệu</strong></td>
+                                        <td>Giới hạn 1,048,576 dòng</td>
+                                        <td>Rất lớn (Database)</td>
+                                        <td>Hàng chục triệu dòng (RAM)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tự động hóa</strong></td>
+                                        <td>Thấp / VBA phức tạp</td>
+                                        <td>Tốt cho truy vấn</td>
+                                        <td>Rất cao (Pipeline / Script)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Xử lý chuỗi & Missing</strong></td>
+                                        <td>Thủ công</td>
+                                        <td>Cơ bản</td>
+                                        <td>Cực mạnh (.str, regex, fillna)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tích hợp Machine Learning</strong></td>
+                                        <td>Không hỗ trợ</td>
+                                        <td>Cần xuất dữ liệu</td>
+                                        <td>Trực tiếp qua Scikit-Learn</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="code-lang">python • Khởi tạo và kiểm tra phiên bản</span>
+                            <div class="code-actions">
+                                <button class="btn-code-action">Sao chép</button>
+                            </div>
+                        </div>
+                        <pre class="code-block"><code class="language-python"># Cài đặt (nếu chưa có): pip install pandas numpy
+import pandas as pd
+import numpy as np
+
+print(f"Phiên bản Pandas: {pd.__version__}")
+print(f"Phiên bản NumPy:  {np.__version__}")</code></pre>
+                        <div class="output-panel">
+                            <div class="output-header">OUTPUT TERMINAL</div>
+                            <pre class="output-content">Phiên bản Pandas: 2.2.2
+Phiên bản NumPy:  1.26.4</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 4: SERIES VS DATAFRAME ==================== -->
+            <div class="slide" id="slide-4">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 1: Kiến Trúc</span>
+                    <h2 class="slide-title">Hai Cấu Trúc Dữ Liệu Nền Tảng: Series &amp; DataFrame</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>1. Series (Mảng 1 Chiều Có Nhãn)</h4>
+                            <p><strong>Series</strong> là mảng 1D đồng nhất (homogeneous) được gán kèm hệ thống chỉ mục
+                                (Index). Một DataFrame có thể xem như một từ điển chứa nhiều Series có chung chỉ mục.
+                            </p>
+                            <ul class="feature-list">
+                                <li>Mỗi cột trong DataFrame khi trích xuất riêng lẻ đều là 1 Series:
+                                    <code>df['Name']</code>.
+                                </li>
+                                <li>Bao gồm hai thành phần: <code>series.values</code> (dữ liệu mảng) và
+                                    <code>series.index</code> (nhãn dòng).
+                                </li>
+                            </ul>
+
+                            <h4 style="margin-top: 14px;">2. DataFrame (Bảng 2 Chiều Dạng Ma Trận Nhãn)</h4>
+                            <p><strong>DataFrame</strong> là cấu trúc 2D linh hoạt gồm các hàng và cột có thể chứa các
+                                kiểu dữ liệu khác nhau (heterogeneous: int, float, str, bool, datetime...).</p>
+                            <ul class="feature-list">
+                                <li><code>axis=0</code> (Trục hàng - Rows / Index): Thao tác theo chiều dọc.</li>
+                                <li><code>axis=1</code> (Trục cột - Columns): Thao tác theo chiều ngang.</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Tạo Series &amp; DataFrame mẫu</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+# 1. Tạo một Series có tùy chỉnh nhãn Index
+scores = pd.Series([85, 92, 78], index=['Toan', 'Ly', 'Hoa'], name='DiemThi')
+print("--- SERIES ---")
+print(scores)
+
+# 2. Tạo DataFrame từ Dictionary
+data = {
+    'MSSV': ['SV01', 'SV02', 'SV03'],
+    'HoTen': ['An', 'Binh', 'Chi'],
+    'GPA': [3.6, 3.8, 3.2]
+}
+df_students = pd.DataFrame(data)
+print("\n--- DATAFRAME ---")
+print(df_students)</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- SERIES ---
+Toan    85
+Ly      92
+Hoa     78
+Name: DiemThi, dtype: int64
+
+--- DATAFRAME ---
+   MSSV HoTen  GPA
+0  SV01    An  3.6
+1  SV02  Binh  3.8
+2  SV03   Chi  3.2</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warn-card">
+                        <strong>Lưu ý quy ước trục (Axis):</strong> Trong tất cả các phương thức của Pandas:
+                        <code>axis=0</code> (mặc định) nghĩa là gom tính toán theo từng dòng (tính theo từng cột), trong
+                        khi <code>axis=1</code> nghĩa là tính toán xuyên qua các cột trên từng dòng!
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 5: CREATING DATAFRAMES ==================== -->
+            <div class="slide" id="slide-5">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 1: Khởi Tạo</span>
+                    <h2 class="slide-title">Các Kỹ Thuật Khởi Tạo DataFrame Nhanh &amp; Tiện Lợi</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Phương Pháp 1: Dictionary &amp; NumPy Array</h4>
+                            <ul class="feature-list">
+                                <li><strong>Từ Dict of Lists:</strong> Key làm tên cột, Value là danh sách giá trị tương
+                                    ứng.</li>
+                                <li><strong>Từ NumPy Random:</strong>
+                                    <code>pd.DataFrame(np.random.rand(r, c), columns=list('abcd'))</code>. Rất tiện lợi
+                                    khi cần sinh ma trận số liệu ngẫu nhiên để thử nghiệm thuật toán.
+                                </li>
+                            </ul>
+
+                            <h4 style="margin-top: 14px;">Phương Pháp 2: Module Kiểm Thử Tích Hợp</h4>
+                            <p>Pandas cung cấp các hàm nội tại sinh mẫu kiểm thử cực kỳ hữu ích:</p>
+                            <ul class="feature-list">
+                                <li><code>pd.util.testing.makeDataFrame()</code>: Tạo bảng ngẫu nhiên 30x4.</li>
+                                <li><code>pd.util.testing.makeTimeDataFrame()</code>: Tạo bảng có Index là chuỗi thời
+                                    gian (DatetimeIndex).</li>
+                                <li><code>pd.util.testing.makeMissingDataframe()</code>: Tạo bảng có cài sẵn các giá trị
+                                    <code>NaN</code> để test làm sạch dữ liệu.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Khởi tạo DataFrame mẫu</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+import numpy as np
+
+# Cách 1: Từ Dictionary với dữ liệu tùy chọn
+df1 = pd.DataFrame({'col_one': [100, 200], 'col_two': [300, 400]})
+print("1. DataFrame từ Dict:\n", df1)
+
+# Cách 2: Sinh ngẫu nhiên từ NumPy (4 dòng, 4 cột)
+df2 = pd.DataFrame(np.random.rand(4, 4), columns=list('ABCD'))
+print("\n2. DataFrame từ np.random:\n", df2.round(3))
+
+# Cách 3: Tạo TimeDataFrame với index ngày tháng
+time_df = pd.DataFrame(
+    np.random.randn(3, 2),
+    index=pd.date_range('2026-01-01', periods=3),
+    columns=['Sales', 'Profit']
+)
+print("\n3. DatetimeIndex DataFrame:\n", time_df.round(2))</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">1. DataFrame từ Dict:
+    col_one  col_two
+0      100      300
+1      200      400
+
+2. DataFrame từ np.random:
+        A      B      C      D
+0  0.417  0.720  0.000  0.302
+1  0.147  0.092  0.186  0.346
+2  0.397  0.539  0.419  0.685
+3  0.204  0.878  0.027  0.670
+
+3. DatetimeIndex DataFrame:
+             Sales  Profit
+2026-01-01   0.45   -0.89
+2026-01-02   1.23    0.72
+2026-01-03  -0.61    1.40</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 6: READING DATA ==================== -->
+            <div class="slide" id="slide-6">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 2: Đọc &amp; Ghi Dữ Liệu</span>
+                    <h2 class="slide-title">Đọc Dữ Liệu Đa Định Dạng: CSV, Excel &amp; TSV</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Các Hàm Nhập Dữ Liệu Chuẩn (I/O)</h4>
+                            <ul class="feature-list">
+                                <li><code>pd.read_csv('filepath.csv')</code>: Đọc file CSV phân tách bằng dấu phẩy.</li>
+                                <li><code>pd.read_excel('filepath.xlsx', sheet_name=0)</code>: Đọc bảng tính Excel (cần
+                                    cài đặt thư viện <code>openpyxl</code>).</li>
+                                <li><code>pd.read_csv('file.txt', delimiter='\t')</code>: Đọc file text phân tách bằng
+                                    ký tự Tab (TSV) hoặc ký tự bất kỳ <code>sep=';'</code>.</li>
+                            </ul>
+
+                            <h4 style="margin-top: 14px;">Tham Số Quan Trọng Thường Dùng:</h4>
+                            <ul class="feature-list">
+                                <li><code>index_col=0</code>: Chọn cột đầu tiên làm Index của DataFrame thay vì sinh chỉ
+                                    số nguyên tự động 0, 1, 2...</li>
+                                <li><code>usecols=['Name', 'HP']</code>: Chỉ tải các cột mong muốn nhằm tiết kiệm RAM.
+                                </li>
+                                <li><code>nrows=100</code>: Chỉ đọc 100 dòng đầu tiên để xem cấu trúc file siêu lớn.
+                                </li>
+                                <li><code>na_values=['NA', 'missing', '-']</code>: Chỉ định các ký hiệu được coi là
+                                    rỗng.</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Đọc file Pokemon.csv</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+# Đọc file Pokemon.csv có sẵn trong thư mục
+df = pd.read_csv('Pokemon.csv')
+
+# Kiểm tra kích thước (dòng, cột)
+print(f"Kích thước tập dữ liệu: {df.shape[0]} dòng, {df.shape[1]} cột")
+
+# Xem 3 dòng đầu tiên
+print("\n--- 3 DÒNG ĐẦU TIÊN CỦA DATAFRAME ---")
+print(df.head(3)[['#', 'Name', 'Type 1', 'Type 2', 'HP', 'Attack']])</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Kích thước tập dữ liệu: 800 dòng, 13 cột
+
+--- 3 DÒNG ĐẦU TIÊN CỦA DATAFRAME ---
+   #       Name Type 1  Type 2  HP  Attack
+0  1  Bulbasaur  Grass  Poison  45      49
+1  2    Ivysaur  Grass  Poison  60      62
+2  3   Venusaur  Grass  Poison  80      82</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 7: DATA INSPECTION ==================== -->
+            <div class="slide" id="slide-7">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 2: Khám Phá Dữ Liệu</span>
+                    <h2 class="slide-title">Khám Phá &amp; Đánh Giá Ban Đầu (Data Inspection)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Bộ 5 Phương Thức "Nằm Lòng" Khi Khám Phá Dữ Liệu</h4>
+                            <ul class="feature-list">
+                                <li><code>df.head(n)</code>: Hiển thị $n$ dòng đầu tiên (mặc định $n=5$).</li>
+                                <li><code>df.tail(n)</code>: Hiển thị $n$ dòng cuối cùng của bảng.</li>
+                                <li><code>df.columns</code>: Trả về danh sách tên tất cả các cột.</li>
+                                <li><code>df.info()</code>: Báo cáo tổng thể về số lượng dòng, kiểu dữ liệu từng cột
+                                    (Dtype), số ô Non-Null và mức tiêu thụ RAM.</li>
+                                <li><code>df.describe()</code>: Thống kê mô tả các chỉ số định lượng: count, mean, std,
+                                    min, 25%, 50% (median), 75%, max.</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Kiểm tra thông tin &amp; thống kê mô tả</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# 1. Danh sách tên cột
+print("Các cột có trong DataFrame:")
+print(list(df.columns))
+
+# 2. Thống kê tóm tắt các chỉ số sức mạnh
+print("\n--- THỐNG KÊ MÔ TẢ (DESCRIBE) ---")
+print(df[['HP', 'Attack', 'Defense', 'Speed']].describe().round(1))</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Các cột có trong DataFrame:
+['#', 'Name', 'Type 1', 'Type 2', 'Total', 'HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed', 'Generation', 'Legendary']
+
+--- THỐNG KÊ MÔ TẢ (DESCRIBE) ---
+          HP  Attack  Defense  Speed
+count  800.0   800.0    800.0  800.0
+mean    69.3    79.0     73.8   68.3
+std     25.5    32.5     31.2   29.1
+min      1.0     5.0      5.0    5.0
+25%     50.0    55.0     50.0   45.0
+50%     65.0    75.0     70.0   65.0
+75%     80.0   100.0     90.0   90.0
+max    255.0   190.0    230.0  180.0</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <strong>Phân tích nhanh:</strong> Pokemon có chỉ số HP trung bình là 69.3 (max 255 - Blissey),
+                        Attack trung bình 79.0 (max 190 - Mega Mewtwo X), và Defense trung bình 73.8 (max 230 -
+                        Shuckle/Steelix).
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 8: SAVING DATA ==================== -->
+            <div class="slide" id="slide-8">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 2: Xuất Dữ Liệu</span>
+                    <h2 class="slide-title">Lưu &amp; Xuất Dữ Liệu Sau Khi Xử Lý</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Các Định Dạng Xuất Chuẩn</h4>
+                            <ul class="feature-list">
+                                <li><code>df.to_csv('filename.csv', index=False)</code>: Xuất ra định dạng CSV chuẩn.
+                                </li>
+                                <li><code>df.to_excel('filename.xlsx', index=False)</code>: Xuất ra bảng tính Excel.
+                                </li>
+                                <li><code>df.to_csv('filename.txt', sep='\t', index=False)</code>: Xuất ra file text
+                                    phân cách bằng Tab.</li>
+                            </ul>
+
+                            <h4 style="margin-top: 14px;">Quy Tắc Sống Còn: <code>index=False</code></h4>
+                            <p>Khi lưu file bằng <code>to_csv()</code>, nếu không truyền tham số
+                                <code>index=False</code>, Pandas sẽ tự động lưu cột chỉ mục hiện tại (0, 1, 2...) thành
+                                một cột mới không tên (Unnamed: 0). Sau vài lần đọc-ghi liên tiếp, file sẽ bị rác bởi
+                                hàng loạt cột index thừa!
+                            </p>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Lọc và lưu file mới</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Lọc các Pokemon Huyền thoại (Legendary)
+legendary_df = df[df['Legendary'] == True]
+
+# Xuất ra file CSV sạch không có cột index thừa
+legendary_df.to_csv('legendary_pokemon.csv', index=False)
+
+# Xuất ra file Text phân cách bằng dấu Tab (\t)
+legendary_df.to_csv('legendary_pokemon.tsv', sep='\t', index=False)
+
+print(f"Đã xuất thành công {len(legendary_df)} Pokemon huyền thoại ra file!")</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Đã xuất thành công 65 Pokemon huyền thoại ra file!</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <strong>Tham số tối ưu hóa:</strong> Bạn có thể chỉ định <code>columns=['Name', 'Total']</code>
+                        để chỉ xuất các cột cần thiết, hoặc dùng <code>compression='gzip'</code> để nén dung lượng file
+                        trực tiếp khi ghi đĩa!
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 9: COLUMN SELECTION ==================== -->
+            <div class="slide" id="slide-9">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 3: Truy Cập Dữ Liệu</span>
+                    <h2 class="slide-title">Truy Cập Cột: Trả Về Series Hay DataFrame?</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Cú Pháp Truy Cập Cột Cần Lưu Ý</h4>
+                            <ul class="feature-list">
+                                <li><strong>1 Cặp ngoặc vuông <code>df['Col']</code>:</strong> Trả về cấu trúc
+                                    <strong>Series 1D</strong>. Dùng khi muốn tính toán các hàm đơn biến:
+                                    <code>.mean()</code>, <code>.sum()</code>, <code>.value_counts()</code>.
+                                </li>
+                                <li><strong>2 Cặp ngoặc vuông <code>df[['Col1', 'Col2']]</code>:</strong> Trả về cấu
+                                    trúc <strong>DataFrame 2D</strong>. Cho phép trích xuất một tập hợp con gồm nhiều
+                                    cột theo thứ tự tùy chọn.</li>
+                                <li><strong>Dấu chấm <code>df.ColName</code>:</strong> Tiện lợi khi viết nhanh, nhưng
+                                    <em>nguy hiểm</em> nếu tên cột có chứa dấu cách (VD: <code>Type 1</code>) hoặc trùng
+                                    với tên phương thức của Pandas (VD: <code>df.count</code>).
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • So sánh kiểu trả về khi lấy cột</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# 1. Lấy 1 cột bằng cặp ngoặc đơn [] -> Trả về Series
+name_series = df['Name']
+print(f"df['Name'] kiểu dữ liệu: {type(name_series)}")
+
+# 2. Lấy nhiều cột bằng cặp ngoặc kép [[]] -> Trả về DataFrame
+subset_df = df[['Name', 'Type 1', 'Attack']].head(3)
+print(f"df[['Name', 'Type 1']] kiểu dữ liệu: {type(subset_df)}")
+print("\n--- BẢNG TRÍCH XUẤT CÁC CỘT ĐƯỢC CHỌN ---")
+print(subset_df)</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">df['Name'] kiểu dữ liệu: &lt;class 'pandas.core.series.Series'&gt;
+df[['Name', 'Type 1']] kiểu dữ liệu: &lt;class 'pandas.core.frame.DataFrame'&gt;
+
+--- BẢNG TRÍCH XUẤT CÁC CỘT ĐƯỢC CHỌN ---
+        Name Type 1  Attack
+0  Bulbasaur  Grass      49
+1    Ivysaur  Grass      62
+2   Venusaur  Grass      82</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warn-card">
+                        <strong>Lời khuyên vàng:</strong> Luôn sử dụng cú pháp <code>df['Col']</code> thay cho
+                        <code>df.Col</code> để tránh các lỗi tiềm ẩn khi tên cột chứa ký tự đặc biệt, dấu cách hoặc
+                        trùng keyword.
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 10: LOC VS ILOC ==================== -->
+            <div class="slide" id="slide-10">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 3: Cắt Lát Nâng Cao</span>
+                    <h2 class="slide-title">Phân Biệt Sâu Sắc: <code>loc</code> vs <code>iloc</code></h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Bảng So Sánh Toàn Diện: <code>loc</code> vs <code>iloc</code></h4>
+                            <table class="styled-table">
+                                <thead>
+                                    <tr>
+                                        <th>Đặc điểm</th>
+                                        <th><code>iloc</code> (Integer-location)</th>
+                                        <th><code>loc</code> (Label-location)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Cơ chế định vị</strong></td>
+                                        <td>Chỉ số nguyên vị trí (0, 1, 2...)</td>
+                                        <td>Nhãn (Index Name &amp; Col Name)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Cú pháp cắt lát</strong></td>
+                                        <td><code>df.iloc[row_idx, col_idx]</code></td>
+                                        <td><code>df.loc[row_label, col_label]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Quy ước cận cuối</strong></td>
+                                        <td><strong>LOẠI TRỪ</strong> cận kết thúc (như Python slice)</td>
+                                        <td><strong>BAO GỒM CẢ</strong> cận kết thúc!</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Truy cập cột</strong></td>
+                                        <td>Số thứ tự cột (0, 1, 2...)</td>
+                                        <td>Tên chuỗi cột ('Name', 'HP')</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="warn-card" style="margin-top: 12px;">
+                                <strong>Cạm bẫy lớn nhất:</strong> <code>df.iloc[0:4]</code> chỉ lấy các dòng có vị trí
+                                0, 1, 2, 3. Trong khi <code>df.loc[0:4]</code> sẽ lấy cả dòng có nhãn là 4 (tổng cộng 5
+                                dòng)!
+                            </div>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Thực hành so sánh iloc và loc</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# 1. Dùng iloc: Lấy 3 dòng đầu (0, 1, 2) và 3 cột đầu (0, 1, 2)
+print("--- 1. df.iloc[0:3, 0:3] (Vị trí nguyên) ---")
+print(df.iloc[0:3, 0:3])
+
+# 2. Dùng loc: Lấy nhãn dòng 0 đến 2 và chỉ định rõ tên cột
+print("\n--- 2. df.loc[0:2, ['Name', 'Total']] (Theo nhãn) ---")
+print(df.loc[0:2, ['Name', 'Total']])
+
+# 3. Lấy giá trị chính xác tại tọa độ dòng 50, cột 'Name'
+print("\n--- 3. Tọa độ cụ thể ---")
+print("df.iloc[2, 1]  =>", df.iloc[2, 1])
+print("df.loc[2, 'Name'] =>", df.loc[2, 'Name'])</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- 1. df.iloc[0:3, 0:3] (Vị trí nguyên) ---
+   #       Name Type 1
+0  1  Bulbasaur  Grass
+1  2    Ivysaur  Grass
+2  3   Venusaur  Grass
+
+--- 2. df.loc[0:2, ['Name', 'Total']] (Theo nhãn) ---
+        Name  Total
+0  Bulbasaur    318
+1    Ivysaur    405
+2   Venusaur    525
+
+--- 3. Tọa độ cụ thể ---
+df.iloc[2, 1]  => Venusaur
+df.loc[2, 'Name'] => Venusaur</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 11: BOOLEAN FILTERING ==================== -->
+            <div class="slide" id="slide-11">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 3: Lọc Dữ Liệu</span>
+                    <h2 class="slide-title">Lọc Dữ Liệu Theo Điều Kiện (Boolean Indexing)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Cơ Chế Hoạt Động Của Boolean Mask</h4>
+                            <p>Khi so sánh một cột với một giá trị (VD: <code>df['HP'] > 100</code>), Pandas tạo ra một
+                                Series chứa các giá trị <code>True</code>/<code>False</code> (Boolean Mask). Khi truyền
+                                Mask này vào cặp ngoặc <code>df[...]</code>, chỉ các dòng có giá trị <code>True</code>
+                                được giữ lại.</p>
+
+                            <h4 style="margin-top: 12px;">3 Quy Tắc Bắt Buộc Khi Kết Hợp Nhiều Điều Kiện:</h4>
+                            <ul class="feature-list">
+                                <li><strong>Toán tử Bitwise:</strong> Dùng <code>&amp;</code> (thay vì
+                                    <code>and</code>), <code>|</code> (thay vì <code>or</code>), <code>~</code> (thay vì
+                                    <code>not</code>).
+                                </li>
+                                <li><strong>Dấu ngoặc đơn:</strong> BẮT BUỘC bọc từng mệnh đề điều kiện trong
+                                    <code>()</code> do thứ tự ưu tiên của toán tử bitwise trong Python cao hơn toán tử
+                                    so sánh.
+                                </li>
+                                <li><strong>Sai:</strong> <code>df[df['HP'] > 50 &amp; df['Speed'] > 80]</code></li>
+                                <li><strong>Đúng:</strong> <code>df[(df['HP'] > 50) &amp; (df['Speed'] > 80)]</code>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Lọc kết hợp đa điều kiện</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Lọc Pokemon thuộc hệ Grass VÀ hệ Poison VÀ có HP > 70
+filtered = df[(df['Type 1'] == 'Grass') & 
+              (df['Type 2'] == 'Poison') & 
+              (df['HP'] > 70)]
+
+print(f"Số lượng Pokemon thỏa mãn: {len(filtered)}")
+print(filtered[['Name', 'Type 1', 'Type 2', 'HP', 'Attack']])</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Số lượng Pokemon thỏa mãn: 2
+                   Name Type 1  Type 2   HP  Attack
+2              Venusaur  Grass  Poison   80      82
+3  VenusaurMega Venusaur  Grass  Poison   80     100</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 12: REVERSE & RESET INDEX ==================== -->
+            <div class="slide" id="slide-12">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 3: Chỉ Mục &amp; Sắp Xếp</span>
+                    <h2 class="slide-title">Đảo Ngược Thứ Tự Hàng/Cột &amp; Quản Lý Index</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>1. Đảo Ngược Thứ Tự Hàng &amp; Cột (Reverse Order)</h4>
+                            <p>Tương tự như cú pháp cắt lát chuỗi/mảng <code>[::-1]</code> của Python, Pandas hỗ trợ đảo
+                                ngược vị trí hàng hoặc cột cực nhanh thông qua <code>loc</code>:</p>
+                            <ul class="feature-list">
+                                <li><strong>Đảo ngược hàng:</strong> <code>df.loc[::-1]</code> (dòng cuối cùng thành
+                                    dòng đầu tiên).</li>
+                                <li><strong>Đảo ngược cột:</strong> <code>df.loc[:, ::-1]</code> (cột ngoài cùng bên
+                                    phải chuyển sang ngoài cùng bên trái).</li>
+                            </ul>
+
+                            <h4 style="margin-top: 14px;">2. Đặt Lại Chỉ Mục (Reset Index)</h4>
+                            <p>Sau khi lọc hoặc sắp xếp, index ban đầu thường bị xáo trộn và không còn liên tục (VD: 2,
+                                5, 87...). Hàm <code>df.reset_index(drop=True)</code> giúp đánh lại số thứ tự từ 0 đến
+                                N-1.</p>
+                            <ul class="feature-list">
+                                <li><code>drop=True</code>: Loại bỏ cột index cũ thay vì biến nó thành cột mới.</li>
+                                <li><code>inplace=True</code>: Ghi đè trực tiếp lên DataFrame hiện tại.</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Đảo ngược dòng và reset index</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# 1. Đảo ngược thứ tự dòng
+reversed_df = df.loc[::-1].head(3)
+print("--- 1. ĐẢO NGƯỢC DÒNG (INDEX BỊ ĐẢO) ---")
+print(reversed_df[['#', 'Name', 'Type 1']])
+
+# 2. Reset index để đánh lại từ 0
+clean_df = reversed_df.reset_index(drop=True)
+print("\n--- 2. SAU KHI RESET_INDEX(DROP=TRUE) ---")
+print(clean_df[['#', 'Name', 'Type 1']])</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- 1. ĐẢO NGƯỢC DÒNG (INDEX BỊ ĐẢO) ---
+       #                 Name   Type 1
+799  721            Volcanion     Fire
+798  720   HoopaHoopa Unbound  Psychic
+797  720  HoopaHoopa Confined  Psychic
+
+--- 2. SAU KHI RESET_INDEX(DROP=TRUE) ---
+     #                 Name   Type 1
+0  721            Volcanion     Fire
+1  720   HoopaHoopa Unbound  Psychic
+2  720  HoopaHoopa Confined  Psychic</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 13: ADDING & CALCULATING COLUMNS ==================== -->
+            <div class="slide" id="slide-13">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 4: Thao Tác Cột</span>
+                    <h2 class="slide-title">Thêm Mới &amp; Tính Toán Cột Dữ Liệu</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>2 Phương Pháp Tính Tổng Chỉ Số (Total Stats)</h4>
+                            <p>Để thêm một cột mới vào DataFrame, chỉ cần gán giá trị cho tên cột đó:
+                                <code>df['New_Col'] = ...</code>
+                            </p>
+                            <ul class="feature-list">
+                                <li><strong>Cách 1 (Thủ công):</strong> Cộng từng cột riêng lẻ:
+                                    <br><code>df['Total'] = df['HP'] + df['Attack'] + df['Defense'] + ...</code>
+                                    <br><em>Nhược điểm:</em> Viết dài dòng, dễ sai sót chính tả khi có nhiều cột.
+                                </li>
+                                <li><strong>Cách 2 (Vectorized tối ưu):</strong> Sử dụng <code>iloc</code> kết hợp
+                                    <code>.sum(axis=1)</code>:
+                                    <br><code>df['Total'] = df.iloc[:, 4:10].sum(axis=1)</code>
+                                    <br><em>Ưu điểm:</em> Ngắn gọn, tận dụng cơ chế SIMD của CPU, xử lý hàng triệu dòng
+                                    chỉ mất vài mili-giây!
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Tạo cột tính toán Total</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Cột 4 đến 9 lần lượt là: HP, Attack, Defense, Sp. Atk, Sp. Def, Speed
+# Dùng iloc[:, 4:10] để gom 6 cột số và tính tổng theo từng hàng (axis=1)
+df['Calculated_Total'] = df.iloc[:, 4:10].sum(axis=1)
+
+# Kiểm tra so sánh với cột Total có sẵn
+match = (df['Calculated_Total'] == df['Total']).all()
+print(f"Tổng tự tính khớp 100% với cột Total gốc: {match}")
+
+print("\n--- KẾT QUẢ HIỂN THỊ CỘT MỚI TÍNH ---")
+print(df[['Name', 'HP', 'Attack', 'Defense', 'Calculated_Total']].head(3))</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Tổng tự tính khớp 100% với cột Total gốc: True
+
+--- KẾT QUẢ HIỂN THỊ CỘT MỚI TÍNH ---
+        Name  HP  Attack  Defense  Calculated_Total
+0  Bulbasaur  45      49       49               318
+1    Ivysaur  60      62       63               405
+2   Venusaur  80      82       83               525</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 14: DROPPING & REORDERING ==================== -->
+            <div class="slide" id="slide-14">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 4: Thao Tác Cột</span>
+                    <h2 class="slide-title">Xóa Cột &amp; Tái Sắp Xếp Vị Trí Các Cột</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>1. Xóa Cột Bằng Phương Thức <code>drop</code></h4>
+                            <p>Khi cần loại bỏ các cột không sử dụng nhằm làm gọn bảng hoặc giảm tiêu thụ RAM:</p>
+                            <ul class="feature-list">
+                                <li><code>df = df.drop(columns=['Total'])</code>: Chỉ định rõ danh sách các cột cần xóa.
+                                </li>
+                                <li>Hoặc dùng: <code>df.drop(['Total'], axis=1, inplace=True)</code>.</li>
+                            </ul>
+
+                            <h4 style="margin-top: 14px;">2. Di Chuyển &amp; Thay Đổi Thứ Tự Cột</h4>
+                            <p>Pandas không có hàm <code>move_column()</code> trực tiếp. Thay vào đó, chúng ta thao tác
+                                trên danh sách tên cột <code>cols = list(df.columns)</code> bằng kỹ thuật cắt ghép list:
+                            </p>
+                            <ul class="feature-list">
+                                <li>Lấy tên cột: <code>cols = list(df.columns)</code></li>
+                                <li>Ghép lại: <code>df = df[cols[0:4] + [cols[-1]] + cols[4:12]]</code></li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Xóa cột và sắp xếp lại vị trí</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# 1. Di chuyển cột Total từ giữa sang ngay sau cột Type 2
+cols = list(df.columns)
+# Đưa cols[4] (Total) vào ngay sau cols[0:4]
+reordered_cols = cols[0:4] + [cols[4]] + cols[5:]
+df = df[reordered_cols]
+
+print("Thứ tự cột sau khi sắp xếp lại:")
+print(list(df.columns)[:6])
+
+# 2. Xóa bỏ cột '#' không cần thiết
+df = df.drop(columns=['#'])
+print("\nSau khi xóa cột '#':")
+print(list(df.columns)[:5])</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Thứ tự cột sau khi sắp xếp lại:
+['#', 'Name', 'Type 1', 'Type 2', 'Total', 'HP']
+
+Sau khi xóa cột '#':
+['Name', 'Type 1', 'Type 2', 'Total', 'HP']</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 15: SORTING DATA ==================== -->
+            <div class="slide" id="slide-15">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 4: Sắp Xếp Dữ Liệu</span>
+                    <h2 class="slide-title">Sắp Xếp Dữ Liệu (Sorting Values)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Phương Thức <code>sort_values</code> Cực Kỳ Linh Hoạt</h4>
+                            <ul class="feature-list">
+                                <li><strong>Sắp xếp đơn cột:</strong>
+                                    <br><code>df.sort_values(by='Name', ascending=True)</code> (A đến Z).
+                                </li>
+                                <li><strong>Sắp xếp đa cột (Multi-column sort):</strong>
+                                    <br>Truyền một danh sách tên cột vào tham số <code>by=['Type 1', 'HP']</code>.
+                                </li>
+                                <li><strong>Tùy biến chiều tăng/giảm cho từng cột riêng biệt:</strong>
+                                    <br>Truyền danh sách boolean vào tham số <code>ascending=[True, False]</code>.
+                                    <br>Ví dụ: Nhóm theo Hệ (A-Z tăng dần), nhưng trong cùng Hệ thì Pokemon nào có HP
+                                    cao nhất xếp lên trước (giảm dần).
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Sắp xếp kết hợp đa cột</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Sắp xếp theo Type 1 (tăng dần A->Z) và HP (giảm dần từ cao xuống thấp)
+sorted_df = df.sort_values(by=['Type 1', 'HP'], ascending=[True, False])
+
+# Xem 4 kết quả đầu tiên của hệ Bug
+print("--- TOP POKEMON CÓ HP CAO NHẤT THEO TỪNG HỆ ---")
+print(sorted_df[['Name', 'Type 1', 'HP', 'Attack']].head(4))</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- TOP POKEMON CÓ HP CAO NHẤT THEO TỪNG HỆ ---
+          Name Type 1   HP  Attack
+677  Shelmet    Bug  100      40
+232  Yanmega    Bug   86      76
+698  Volcarona    Bug   85      60
+18   BeedrillMega    Bug   65     150</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <strong>Sắp xếp theo chỉ mục (Index):</strong> Khi muốn đưa bảng trở về thứ tự ban đầu sau nhiều
+                        lần biến đổi, chỉ cần gọi hàm <code>df.sort_index(inplace=True)</code>.
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 16: CONDITIONAL CHANGES ==================== -->
+            <div class="slide" id="slide-16">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 4: Cập Nhật Dữ Liệu</span>
+                    <h2 class="slide-title">Thay Đổi Dữ Liệu Theo Điều Kiện (Conditional Updates)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Cú Pháp Chuẩn: <code>df.loc[condition, column] = value</code></h4>
+                            <p>Thay vì sử dụng vòng lặp duyệt qua từng dòng cực kỳ chậm, Pandas cho phép cập nhật hàng
+                                loạt giá trị thỏa mãn một biểu thức điều kiện chỉ với một dòng code.</p>
+
+                            <h4 style="margin-top: 14px;">Các Trường Hợp Sử Dụng Phổ Biến:</h4>
+                            <ul class="feature-list">
+                                <li><strong>Đổi tên nhãn giá trị:</strong> Đổi tên hệ <code>'Fire'</code> thành
+                                    <code>'Flamer'</code>:
+                                    <br><code>df.loc[df['Type 1'] == 'Fire', 'Type 1'] = 'Flamer'</code>
+                                </li>
+                                <li><strong>Cập nhật giá trị dựa trên cột khác:</strong> Gán trạng thái huyền thoại nếu
+                                    thỏa mãn chỉ số:
+                                    <br><code>df.loc[df['Total'] > 700, 'Legendary'] = True</code>
+                                </li>
+                                <li><strong>Cập nhật nhiều cột đồng thời:</strong>
+                                    <br><code>df.loc[condition, ['ColA', 'ColB']] = ['ValA', 'ValB']</code>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Thay đổi giá trị theo điều kiện</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# 1. Đổi tên hệ 'Fire' thành 'Flame'
+df.loc[df['Type 1'] == 'Fire', 'Type 1'] = 'Flame'
+
+# Kiểm tra kết quả sau khi đổi
+flame_pokemon = df.loc[df['Type 1'] == 'Flame']
+print(f"Số lượng Pokemon hệ Flame: {len(flame_pokemon)}")
+print(flame_pokemon[['Name', 'Type 1', 'Attack']].head(3))
+
+# 2. Hoàn tác lại như ban đầu
+df.loc[df['Type 1'] == 'Flame', 'Type 1'] = 'Fire'</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Số lượng Pokemon hệ Flame: 52
+         Name Type 1  Attack
+4   Charmander  Flame      52
+5   Charmeleon  Flame      64
+6    Charizard  Flame      84</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warn-card">
+                        <strong>Tránh SettingWithCopyWarning:</strong> Tuyệt đối không viết
+                        <code>df[df['Type 1'] == 'Fire']['Type 1'] = 'Flame'</code> vì thao tác này thực hiện trên một
+                        bản sao (chained indexing), dẫn đến cảnh báo lỗi và dữ liệu gốc không được cập nhật!
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 17: STRING FILTERING ==================== -->
+            <div class="slide" id="slide-17">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 5: Xử Lý Chuỗi</span>
+                    <h2 class="slide-title">Lọc Chuỗi Ký Tự Với Bộ Truy Xuất <code>.str</code></h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Sức Mạnh Của Vectorized String Accessor (<code>.str</code>)</h4>
+                            <p>Pandas cung cấp bộ thuộc tính <code>.str</code> cho phép áp dụng các phương thức xử lý
+                                chuỗi trên toàn bộ cột cùng một lúc:</p>
+                            <ul class="feature-list">
+                                <li><code>.str.contains('keyword')</code>: Kiểm tra cột có chứa chuỗi con hay không.
+                                </li>
+                                <li><code>case=False</code>: Bỏ qua phân biệt chữ hoa, chữ thường khi tìm kiếm.</li>
+                                <li><code>~</code> (Dấu ngã - NOT): Phủ định điều kiện, dùng để lọc các phần tử
+                                    <strong>KHÔNG</strong> chứa chuỗi con.
+                                </li>
+                                <li><code>.str.startswith('P')</code>: Lọc các bản ghi bắt đầu bằng ký tự 'P'.</li>
+                                <li><code>.str.endswith('saur')</code>: Lọc các bản ghi kết thúc bằng 'saur'.</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Lọc chuỗi với .str.contains</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# 1. Tìm tất cả Pokemon có chứa chữ 'Mega' trong tên
+mega_df = df.loc[df['Name'].str.contains('Mega')]
+print(f"Số lượng Pokemon dạng tiến hóa Mega: {len(mega_df)}")
+
+# 2. Lọc bỏ các dạng Mega (chỉ giữ lại Pokemon gốc)
+non_mega = df.loc[~df['Name'].str.contains('Mega')]
+print(f"Số lượng Pokemon nguyên bản (không Mega): {len(non_mega)}")
+
+# 3. Tìm các Pokemon chứa chữ 'chu' (không phân biệt hoa thường)
+chu_df = df.loc[df['Name'].str.contains('chu', case=False)]
+print("\nCác Pokemon có tên chứa 'chu':")
+print(chu_df[['#', 'Name', 'Type 1']].values.tolist())</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Số lượng Pokemon dạng tiến hóa Mega: 49
+Số lượng Pokemon nguyên bản (không Mega): 751
+
+Các Pokemon có tên chứa 'chu':
+[[25, 'Pikachu', 'Electric'], [26, 'Raichu', 'Electric']]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 18: REGEX FILTERING ==================== -->
+            <div class="slide" id="slide-18">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 5: Xử Lý Chuỗi</span>
+                    <h2 class="slide-title">Lọc Nâng Cao Với Biểu Thức Chính Quy (Regex)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Tích Hợp Regular Expressions (Regex) Trong Pandas</h4>
+                            <p>Khi các phương thức chuỗi cơ bản không đủ đáp ứng các mẫu văn bản phức tạp, ta kích hoạt
+                                tham số <code>regex=True</code> kết hợp cùng thư viện chuẩn <code>re</code> của Python:
+                            </p>
+                            <ul class="feature-list">
+                                <li><code>flags=re.I</code>: Tương đương <code>re.IGNORECASE</code>, không phân biệt hoa
+                                    thường.</li>
+                                <li>Toán tử <code>|</code> trong Regex đại diện cho phép OR giữa các mẫu từ khóa (VD:
+                                    <code>'Fire|Grass'</code>).
+                                </li>
+                                <li>Ký tự <code>^</code> đại diện cho bắt đầu chuỗi (VD: <code>^pi[a-z]*</code> lọc các
+                                    tên bắt đầu bằng "pi" theo sau là các chữ cái).</li>
+                                <li>Ký tự <code>$</code> đại diện cho kết thúc chuỗi.</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Lọc biểu thức chính quy (Regex)</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+import re
+
+df = pd.read_csv('Pokemon.csv')
+
+# 1. Lọc Pokemon có Type 1 là 'Fire' HOẶC 'Grass' bằng Regex
+fg_df = df.loc[df['Type 1'].str.contains('Fire|Grass', regex=True, flags=re.I)]
+print(f"Số lượng Pokemon hệ Fire hoặc Grass: {len(fg_df)}")
+
+# 2. Lọc Pokemon có tên bắt đầu bằng 'pi' (như Pikachu, Pidgey, Pinsir...)
+pi_df = df.loc[df['Name'].str.contains('^pi[a-z]*', flags=re.I, regex=True)]
+print("\n--- POKEMON BẮT ĐẦU BẰNG 'PI' ---")
+print(pi_df[['#', 'Name', 'Type 1', 'HP']].head(4))</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Số lượng Pokemon hệ Fire hoặc Grass: 122
+
+--- POKEMON BẮT ĐẦU BẰNG 'PI' ---
+     #       Name    Type 1  HP
+13  10  Caterpie       Bug  45
+20  16    Pidgey    Normal  40
+21  17 Pidgeotto    Normal  63
+22  18   Pidgeot    Normal  83</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 19: STRING SPLIT ==================== -->
+            <div class="slide" id="slide-19">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 5: Xử Lý Chuỗi</span>
+                    <h2 class="slide-title">Tách Một Cột Chuỗi Thành Nhiều Cột (String Split)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Tham Số Quyết Định: <code>expand=True</code></h4>
+                            <p>Khi gặp các trường dữ liệu gộp như Họ &amp; Tên, Địa chỉ hoặc Mã định danh phân tách bằng
+                                dấu phân cách (dấu cách, gạch ngang, phẩy):</p>
+                            <ul class="feature-list">
+                                <li><code>df['col'].str.split(' ')</code>: Mặc định trả về 1 Series chứa danh sách các
+                                    phần tử <code>['John', 'Arthur', 'Doe']</code>.</li>
+                                <li><code>expand=True</code>: <strong>Bung rộng</strong> danh sách thành một DataFrame
+                                    với mỗi phần tử là 1 cột riêng biệt!</li>
+                                <li>Gán trực tiếp vào các cột mới:
+                                    <br><code>df[['First', 'Middle', 'Last']] = df['Name'].str.split(' ', expand=True)</code>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Tách cột chuỗi họ và tên</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+# Tạo DataFrame chứa họ tên đầy đủ
+df_users = pd.DataFrame({
+    'user_id': [101, 102],
+    'fullname': ['Nguyen Van An', 'Tran Thi Binh']
+})
+
+# Tách chuỗi theo dấu cách thành 3 cột riêng biệt
+df_users[['Ho', 'Dem', 'Ten']] = df_users['fullname'].str.split(' ', expand=True)
+
+print("--- DATAFRAME SAU KHI TÁCH CỘT ---")
+print(df_users[['user_id', 'Ho', 'Dem', 'Ten']])</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- DATAFRAME SAU KHI TÁCH CỘT ---
+   user_id      Ho   Dem    Ten
+0      101  Nguyen   Van     An
+1      102    Tran   Thi   Binh</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <strong>Tham số giới hạn số lần tách (<code>n</code>):</strong> Nếu muốn chỉ tách tối đa 1 lần
+                        đầu tiên (VD: tách Email thành Username và Domain), dùng
+                        <code>df['email'].str.split('@', n=1, expand=True)</code>.
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 20: GROUPBY FUNDAMENTALS ==================== -->
+            <div class="slide" id="slide-20">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 6: Thống Kê &amp; Gom Nhóm</span>
+                    <h2 class="slide-title">Gom Nhóm Dữ Liệu Cốt Lõi: Mô Hình GroupBy</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Cơ Chế Split - Apply - Combine (Hadley Wickham)</h4>
+                            <ul class="feature-list">
+                                <li><strong>1. Split (Chia tách):</strong> Chia nhỏ DataFrame gốc thành các nhóm dựa
+                                    trên giá trị của một hoặc nhiều cột khóa (VD: Nhóm theo <code>Type 1</code>).</li>
+                                <li><strong>2. Apply (Áp dụng):</strong> Áp dụng một hàm tính toán trên từng nhóm độc
+                                    lập (VD: <code>.mean()</code>, <code>.sum()</code>, <code>.count()</code>,
+                                    <code>.max()</code>, <code>.median()</code>).
+                                </li>
+                                <li><strong>3. Combine (Gộp lại):</strong> Gom kết quả tính toán của các nhóm thành một
+                                    cấu trúc Series hoặc DataFrame mới.</li>
+                            </ul>
+
+                            <h4 style="margin-top: 14px;">Cú Pháp Chuẩn Tối Ưu:</h4>
+                            <p>Luôn chỉ định cột cần tính sau <code>groupby()</code> để tránh tính toán dư thừa trên
+                                toàn bộ bảng:</p>
+                            <code>df.groupby('Type 1')['Attack'].mean()</code>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • GroupBy tính sức tấn công trung bình</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Gom nhóm theo Type 1 và tính sức tấn công trung bình của từng hệ
+type_attack = df.groupby('Type 1')['Attack'].mean().round(1)
+
+# Sắp xếp giảm dần để tìm các hệ có sức mạnh tấn công khủng nhất
+top_attack_types = type_attack.sort_values(ascending=False).head(5)
+
+print("--- TOP 5 HỆ CÓ SỨC TẤN CÔNG (ATTACK) TRUNG BÌNH CAO NHẤT ---")
+print(top_attack_types)</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- TOP 5 HỆ CÓ SỨC TẤN CÔNG (ATTACK) TRUNG BÌNH CAO NHẤT ---
+Type 1
+Dragon      112.1
+Fighting     96.8
+Ground       95.8
+Rock         92.9
+Steel        92.7
+Name: Attack, dtype: float64</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <strong>Kết quả phân tích:</strong> Hệ Rồng (Dragon) dẫn đầu tuyệt đối với Attack trung bình lên
+                        tới 112.1 điểm, theo sau là Fighting (96.8) và Ground (95.8).
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 21: MULTI-COLUMN GROUPBY ==================== -->
+            <div class="slide" id="slide-21">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 6: Thống Kê &amp; Gom Nhóm</span>
+                    <h2 class="slide-title">GroupBy Đa Chiều &amp; Thống Kê Đa Hàm (Aggregation)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>1. Gom Nhóm Đa Tầng (Multi-column GroupBy)</h4>
+                            <p>Khi truyền một danh sách các cột khóa vào <code>groupby(['Type 1', 'Type 2'])</code>, dữ
+                                liệu sẽ được phân cấp thành chỉ mục nhiều tầng (MultiIndex).</p>
+
+                            <h4 style="margin-top: 12px;">2. Tính Toán Nhiều Hàm Cùng Lúc Với <code>.agg()</code></h4>
+                            <p>Thay vì chỉ gọi một hàm duy nhất, phương thức <code>.agg()</code> cho phép tính toán đồng
+                                thời nhiều chỉ số thống kê hoặc áp dụng các hàm khác nhau cho từng cột riêng biệt:</p>
+                            <ul class="feature-list">
+                                <li><code>df.groupby('Type 1')['HP'].agg(['count', 'mean', 'max'])</code></li>
+                                <li>Đếm nhanh số lượng phần tử với <code>df['Type 1'].value_counts()</code>.</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Thống kê đa hàm với .agg()</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Gom nhóm theo Type 1 và tính đồng thời count, mean, min, max của cột Total
+type_stats = df.groupby('Type 1')['Total'].agg(
+    SoLuong='count',
+    DiemTB='mean',
+    DiemCaoNhat='max'
+).round(1).sort_values(by='DiemTB', ascending=False)
+
+print("--- THỐNG KÊ TOÀN DIỆN CHỈ SỐ TOTAL THEO HỆ POKEMON ---")
+print(type_stats.head(5))</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- THỐNG KÊ TOÀN DIỆN CHỈ SỐ TOTAL THEO HỆ POKEMON ---
+        SoLuong  DiemTB  DiemCaoNhat
+Type 1                              
+Dragon       32   550.5          780
+Steel        27   487.7          700
+Flying        4   485.0          580
+Psychic      57   476.0          780
+Fire         52   458.1          680</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 22: RESHAPE UNSTACK ==================== -->
+            <div class="slide" id="slide-22">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 6: Tái Định Hình</span>
+                    <h2 class="slide-title">Xoay Chiều Series Đa Chỉ Mục Với <code>unstack()</code></h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Vấn Đề Với Kết Quả MultiIndex Sau GroupBy</h4>
+                            <p>Khi gom nhóm trên 2 cột (VD: <code>['Type 1', 'Legendary']</code>), kết quả trả về là một
+                                Series có MultiIndex dọc rất khó đọc và không thể đưa trực tiếp vào các biểu đồ ma trận
+                                (Heatmap).</p>
+
+                            <h4 style="margin-top: 14px;">Giải Pháp: <code>unstack()</code></h4>
+                            <ul class="feature-list">
+                                <li>Phương thức <code>unstack()</code> chuyển chỉ mục tầng trong cùng (Level 1 - ở đây
+                                    là <code>Legendary</code>) thành các cột ngang.</li>
+                                <li>Biến đổi cấu trúc từ Series 1D phân cấp thành một <strong>DataFrame ma trận
+                                        2D</strong> trực quan và dễ theo dõi!</li>
+                                <li>Ngược lại với <code>unstack()</code> là phương thức <code>stack()</code> giúp xoay
+                                    cột trở lại thành hàng.</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Xoay chiều dữ liệu bằng unstack</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Gom nhóm đếm số lượng Pokemon theo Hệ (Type 1) và Huyền thoại (Legendary)
+grouped_series = df.groupby(['Type 1', 'Legendary'])['#'].count()
+
+# Dùng unstack() xoay giá trị Legendary thành 2 cột riêng biệt: False và True
+matrix_df = grouped_series.unstack().fillna(0).astype(int)
+
+print("--- MA TRẬN ĐẾM SỐ LƯỢNG SAU KHI UNSTACK ---")
+print(matrix_df.head(6))</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- MA TRẬN ĐẾM SỐ LƯỢNG SAU KHI UNSTACK ---
+Legendary  False  True 
+Type 1                 
+Bug           69      0
+Dark          29      2
+Dragon        20     12
+Electric      40      4
+Fairy         16      1
+Fighting      27      0</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <strong>Quan sát thú vị:</strong> Hệ Bug và Fighting không sở hữu bất kỳ Pokemon Huyền thoại nào
+                        (0), trong khi hệ Dragon sở hữu tới 12/32 Pokemon Huyền thoại (chiếm gần 40%)!
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 23: MEMORY OPTIMIZATION ==================== -->
+            <div class="slide" id="slide-23">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 7: Dữ Liệu Lớn</span>
+                    <h2 class="slide-title">Kiểm Tra &amp; Tối Ưu Hóa Bộ Nhớ RAM (Memory Optimization)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Bí Mật Đằng Sau Kiểu Dữ Liệu <code>category</code></h4>
+                            <p>Trong Pandas, các cột kiểu chuỗi ký tự mặc định mang kiểu <code>object</code>. Kiểu
+                                <code>object</code> lưu trữ con trỏ trỏ đến các đối tượng Python riêng lẻ trong RAM, cực
+                                kỳ tốn bộ nhớ!
+                            </p>
+
+                            <h4 style="margin-top: 12px;">Giải Pháp Đột Phá:</h4>
+                            <ul class="feature-list">
+                                <li>Kiểm tra bộ nhớ thực: <code>df.info(memory_usage='deep')</code></li>
+                                <li>Đối với các cột dạng phân loại có số lượng giá trị lặp lại nhiều lần (VD: Tỉnh/thành
+                                    phố, Giới tính, Hệ Pokemon):
+                                    <br>Chuyển sang <code>category</code>:
+                                    <code>df['Type 1'] = df['Type 1'].astype('category')</code>
+                                </li>
+                                <li><strong>Cơ chế:</strong> Pandas chỉ lưu danh mục duy nhất 1 lần và dùng mảng số
+                                    nguyên nhỏ (int8) để ánh xạ vị trí. Giảm ngay <strong>50% - 90%</strong> dung lượng
+                                    RAM!</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Tối ưu bộ nhớ với category</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Đo bộ nhớ ban đầu (deep memory check)
+mem_before = df.memory_usage(deep=True).sum() / 1024
+print(f"1. Bộ nhớ RAM ban đầu: {mem_before:.2f} KB")
+
+# Ép kiểu Type 1 và Type 2 sang dạng Category
+df['Type 1'] = df['Type 1'].astype('category')
+df['Type 2'] = df['Type 2'].astype('category')
+
+# Đo lại bộ nhớ sau khi tối ưu
+mem_after = df.memory_usage(deep=True).sum() / 1024
+print(f"2. Bộ nhớ sau khi chuyển category: {mem_after:.2f} KB")
+
+percent_saved = ((mem_before - mem_after) / mem_before) * 100
+print(f"-> Tiết kiệm thành công: {percent_saved:.1f}% RAM!")</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">1. Bộ nhớ RAM ban đầu: 194.72 KB
+2. Bộ nhớ sau khi chuyển category: 113.53 KB
+-> Tiết kiệm thành công: 41.7% RAM!</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 24: CHUNKING BIG DATA ==================== -->
+            <div class="slide" id="slide-24">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 7: Dữ Liệu Lớn</span>
+                    <h2 class="slide-title">Đọc Dữ Liệu Khổng Lồ Theo Từng Khối (Chunking &amp; Streaming)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Khi Dữ Liệu Vượt Quá Dung Lượng RAM Vật Lý</h4>
+                            <p>Nếu bạn cố mở một file CSV 20GB trên máy tính chỉ có 16GB RAM, chương trình sẽ lập tức
+                                báo lỗi <code>MemoryError</code> và sập ứng dụng. Pandas giải quyết triệt để vấn đề này
+                                bằng 2 kỹ thuật:</p>
+
+                            <ul class="feature-list">
+                                <li><strong>Kỹ thuật 1 (Chỉ tải cột cần dùng):</strong>
+                                    <br>Dùng <code>usecols=['Name', 'HP', 'Attack']</code> để loại bỏ hoàn toàn các cột
+                                    không quan trọng ngay từ đĩa.
+                                </li>
+                                <li><strong>Kỹ thuật 2 (Đọc theo từng mẻ - Chunks):</strong>
+                                    <br>Dùng <code>chunksize=N</code>. Khi đó <code>pd.read_csv()</code> không trả về
+                                    DataFrame mà trả về một <strong>TextFileReader Iterator</strong>.
+                                </li>
+                                <li>Mỗi lần lặp chỉ nạp đúng $N$ dòng vào RAM, xử lý xong rồi giải phóng để nạp tiếp mẻ
+                                    sau.</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Xử lý dữ liệu dạng Streaming Chunk</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+# Đọc file theo từng khối 100 dòng mỗi lần
+chunks = pd.read_csv('Pokemon.csv', chunksize=100)
+
+total_fire_pokemon = 0
+
+# Duyệt qua từng mẻ dữ liệu độc lập
+for i, chunk in enumerate(chunks):
+    # Đếm số lượng Pokemon hệ Fire trong mẻ hiện tại
+    fire_count = (chunk['Type 1'] == 'Fire').sum()
+    total_fire_pokemon += fire_count
+    if i < 2:
+        print(f"Mẻ {i+1} (100 dòng): Tìm thấy {fire_count} Pokemon hệ Fire")
+
+print(f"\n=> TỔNG CỘNG: Tìm thấy {total_fire_pokemon} Pokemon hệ Fire qua toàn bộ file!")</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Mẻ 1 (100 dòng): Tìm thấy 8 Pokemon hệ Fire
+Mẻ 2 (100 dòng): Tìm thấy 14 Pokemon hệ Fire
+
+=> TỔNG CỘNG: Tìm thấy 52 Pokemon hệ Fire qua toàn bộ file!</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 25: SELECT DTYPES & TO NUMERIC ==================== -->
+            <div class="slide" id="slide-25">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 7: Dữ Liệu Lớn</span>
+                    <h2 class="slide-title">Lọc Theo Kiểu Dữ Liệu &amp; Ép Kiểu An Toàn (<code>to_numeric</code>)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>1. Lọc Cột Theo Dtype (<code>select_dtypes</code>)</h4>
+                            <p>Rất hữu ích khi cần tách riêng các biến định lượng (numeric) và biến định tính
+                                (categorical) trước khi huấn luyện mô hình:</p>
+                            <ul class="feature-list">
+                                <li><code>df.select_dtypes(include='number')</code>: Lấy tất cả cột số (int64, float64).
+                                </li>
+                                <li><code>df.select_dtypes(include='object')</code>: Lấy các cột chuỗi văn bản.</li>
+                                <li><code>df.select_dtypes(exclude=['number'])</code>: Loại trừ các cột số.</li>
+                            </ul>
+
+                            <h4 style="margin-top: 14px;">2. Ép Kiểu An Toàn Với <code>errors='coerce'</code></h4>
+                            <p>Khi dữ liệu bị lẫn các ký tự bẩn như <code>'-'</code>, <code>'N/A'</code>,
+                                <code>'?'</code>, hàm <code>astype(float)</code> sẽ lập tức báo lỗi
+                                <code>ValueError</code>. Giải pháp cứu cánh là dùng <code>pd.to_numeric()</code> với
+                                tham số <code>errors='coerce'</code> để tự động biến các ký tự lỗi thành
+                                <code>NaN</code>!
+                            </p>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Ép kiểu chuỗi số lỗi</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+# Dữ liệu chứa chuỗi số bị lỗi ký tự '-'
+dirty_df = pd.DataFrame({
+    'col_a': ['1.1', '2.2', '3.3'],
+    'col_b': ['4.4', '5.5', '6.6'],
+    'col_c': ['7.7', '8.8', '-']   # Có ký tự bẩn '-'
+})
+
+print("1. Dtype ban đầu:")
+print(dirty_df.dtypes.to_dict())
+
+# Ép toàn bộ bảng về số an toàn, ký tự lỗi chuyển thành 0
+clean_num_df = dirty_df.apply(pd.to_numeric, errors='coerce').fillna(0)
+
+print("\n2. Dtype sau khi dùng to_numeric(errors='coerce'):")
+print(clean_num_df.dtypes.to_dict())
+print("\n3. Bảng dữ liệu sạch:\n", clean_num_df)</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">1. Dtype ban đầu:
+{'col_a': dtype('O'), 'col_b': dtype('O'), 'col_c': dtype('O')}
+
+2. Dtype sau khi dùng to_numeric(errors='coerce'):
+{'col_a': dtype('float64'), 'col_b': dtype('float64'), 'col_c': dtype('float64')}
+
+3. Bảng dữ liệu sạch:
+    col_a  col_b  col_c
+0    1.1    4.4    7.7
+1    2.2    5.5    8.8
+2    3.3    6.6    0.0</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 26: DETECTING MISSING VALUES ==================== -->
+            <div class="slide" id="slide-26">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 8: Dữ Liệu Khuyết Thiếu</span>
+                    <h2 class="slide-title">Phát Hiện &amp; Đánh Giá Giá Trị Còn Thiếu (Missing Values)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Dữ Liệu Khuyết Thiếu (Missing Data) Trong Thực Tế</h4>
+                            <p>Trong thực tế, 95% tập dữ liệu thu thập từ form người dùng, sensor IoT hoặc web scraping
+                                đều bị khuyết thiếu (mang giá trị <code>NaN</code> hoặc <code>None</code>). Việc phát
+                                hiện sớm là bước bắt buộc trong quy trình Data Wrangling.</p>
+
+                            <h4 style="margin-top: 14px;">Bộ 2 Lệnh Kiểm Tra Cốt Lõi:</h4>
+                            <ul class="feature-list">
+                                <li><code>df.isna().sum()</code>: Đếm tổng số lượng ô bị khuyết thiếu trên từng cột.
+                                </li>
+                                <li><code>df.isna().mean() * 100</code>: Tính <strong>tỷ lệ phần trăm khuyết
+                                        thiếu</strong> trên từng cột. Chỉ số này giúp đưa ra quyết định nên điền bù dữ
+                                    liệu (imputation) hay loại bỏ hoàn toàn cột đó.</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Thống kê giá trị thiếu trong Pokemon</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Kiểm tra số lượng và tỷ lệ giá trị còn thiếu
+missing_counts = df.isna().sum()
+missing_percent = (df.isna().mean() * 100).round(2)
+
+# Ghép thành bảng báo cáo tổng quan
+missing_report = pd.DataFrame({
+    'SoLuongNull': missing_counts,
+    'TyLePhanTram': missing_percent
+})
+
+# Lọc các cột có dữ liệu null
+print("--- CỘT CÓ DỮ LIỆU BỊ KHUYẾT THIẾU ---")
+print(missing_report[missing_report['SoLuongNull'] > 0])</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- CỘT CÓ DỮ LIỆU BỊ KHUYẾT THIẾU ---
+        SoLuongNull  TyLePhanTram
+Type 2          386         48.25</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <strong>Nhận định chuyên sâu:</strong> Cột <code>Type 2</code> có 386 giá trị null (chiếm
+                        48.25%), phản ánh thực tế rằng gần một nửa số lượng Pokemon trong game là Pokemon đơn hệ (chỉ có
+                        Type 1 mà không có Type 2 phụ trợ).
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 27: HANDLING MISSING VALUES ==================== -->
+            <div class="slide" id="slide-27">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 8: Dữ Liệu Khuyết Thiếu</span>
+                    <h2 class="slide-title">Xử Lý Dữ Liệu Khuyết Thiếu: Dropna, Fillna &amp; Interpolate</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>3 Chiến Lược Xử Lý Missing Values Chuẩn</h4>
+                            <ul class="feature-list">
+                                <li><strong>1. Xóa dòng/cột (Drop):</strong>
+                                    <br>• <code>df.dropna(axis='rows')</code>: Xóa dòng có ít nhất 1 ô null.
+                                    <br>• <code>df.dropna(thresh=len(df)*0.6, axis='columns')</code>: Chỉ giữ lại các
+                                    cột có ít nhất 60% dữ liệu hợp lệ.
+                                </li>
+                                <li><strong>2. Điền giá trị thay thế (Imputation):</strong>
+                                    <br>• Điền giá trị cố định: <code>df['Type 2'].fillna('None Type')</code>.
+                                    <br>• Điền trung bình: <code>df['HP'].fillna(df['HP'].mean())</code>.
+                                    <br>• Forward Fill: <code>df.fillna(method='ffill')</code> lấy giá trị dòng trước
+                                    điền vào dòng sau.
+                                </li>
+                                <li><strong>3. Nội suy toán học (Interpolate):</strong>
+                                    <br>• <code>df.interpolate()</code>: Ước lượng giá trị trung gian theo hàm tuyến
+                                    tính, cực kỳ hiệu quả cho dữ liệu chuỗi thời gian (Time-series).
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Điền giá trị khuyết cho Pokemon</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Điền nhãn 'None Type' cho các Pokemon không có hệ phụ
+df['Type 2'] = df['Type 2'].fillna('None Type')
+
+# Kiểm tra lại số lượng null
+null_remained = df['Type 2'].isna().sum()
+print(f"Số lượng ô null còn lại ở Type 2: {null_remained}")
+
+# Xem kết quả với Pokemon đơn hệ Charmander
+print("\n--- KẾT QUẢ HIỂN THỊ CHARMANDER (ĐƠN HỆ) ---")
+print(df[df['Name'] == 'Charmander'][['Name', 'Type 1', 'Type 2']])</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Số lượng ô null còn lại ở Type 2: 0
+
+--- KẾT QUẢ HIỂN THỊ CHARMANDER (ĐƠN HỆ) ---
+         Name Type 1     Type 2
+4  Charmander   Fire  None Type</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 28: CONCAT MULTIPLE FILES ==================== -->
+            <div class="slide" id="slide-28">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 9: Hợp Nhất Bảng</span>
+                    <h2 class="slide-title">Ghép Nối Dữ Liệu Theo Dòng &amp; Cột (<code>pd.concat</code>)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>2 Cơ Chế Ghép Nối Dữ Liệu Chính</h4>
+                            <p>Khi dữ liệu được phân chia thành nhiều file theo chu kỳ thời gian hoặc theo thuộc tính,
+                                ta dùng <code>pd.concat([df1, df2, ...])</code>:</p>
+
+                            <ul class="feature-list">
+                                <li><strong>1. Ghép nối theo Hàng (Row-wise, axis=0):</strong>
+                                    <br>Thường dùng khi gom các file dữ liệu theo tháng hoặc theo từng phân vùng (VD:
+                                    Doanh thu Q1 + Q2 + Q3).
+                                    <br><strong>Bắt buộc:</strong> Thêm tham số <code>ignore_index=True</code> để đánh
+                                    lại thứ tự chỉ mục liền mạch từ 0 đến N!
+                                </li>
+                                <li><strong>2. Ghép nối theo Cột (Column-wise, axis='columns'):</strong>
+                                    <br>Thường dùng khi nối bảng đặc trưng (Features) với bảng nhãn mục tiêu (Labels) có
+                                    cùng thứ tự bản ghi.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Ghép nối 2 nửa DataFrame</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Tách thành 2 mẩu dữ liệu nhỏ để mô phỏng
+part1 = df.iloc[:2, [1, 2]]   # 2 dòng đầu, cột Name và Type 1
+part2 = df.iloc[2:4, [1, 2]]  # 2 dòng kế tiếp
+
+# Ghép theo hàng (Row-wise)
+combined_rows = pd.concat([part1, part2], ignore_index=True)
+print("--- 1. GHÉP THEO HÀNG (ROW-WISE) ---")
+print(combined_rows)
+
+# Ghép theo cột (Column-wise)
+col_a = df[['Name']].head(2)
+col_b = df[['HP', 'Attack']].head(2)
+combined_cols = pd.concat([col_a, col_b], axis='columns')
+print("\n--- 2. GHÉP THEO CỘT (COLUMN-WISE) ---")
+print(combined_cols)</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- 1. GHÉP THEO HÀNG (ROW-WISE) ---
+                    Name Type 1
+0              Bulbasaur  Grass
+1                Ivysaur  Grass
+2               Venusaur  Grass
+3  VenusaurMega Venusaur  Grass
+
+--- 2. GHÉP THEO CỘT (COLUMN-WISE) ---
+        Name  HP  Attack
+0  Bulbasaur  45      49
+1    Ivysaur  60      62</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 29: MELT WIDE TO LONG ==================== -->
+            <div class="slide" id="slide-29">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 9: Tái Cấu Trúc</span>
+                    <h2 class="slide-title">Tái Định Hình: Dạng Rộng Sang Dài (Wide to Long với <code>melt</code>)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Tiêu Chuẩn Tidy Data Của Khoa Học Dữ Liệu</h4>
+                            <p>Trong cấu trúc bảng thông thường (Wide format), mỗi chỉ số như <code>HP</code>,
+                                <code>Attack</code>, <code>Defense</code> nằm ở 1 cột riêng biệt. Khi cần vẽ biểu đồ
+                                Facet hoặc phân tích thống kê theo nhóm, ta cần đưa về dạng dài (Long format).
+                            </p>
+
+                            <h4 style="margin-top: 14px;">Cú Pháp Phương Thức <code>melt()</code>:</h4>
+                            <ul class="feature-list">
+                                <li><code>id_vars='Name'</code>: Cột định danh được giữ nguyên làm khóa gốc.</li>
+                                <li><code>var_name='Stats'</code>: Tên của cột mới chứa tên các thuộc tính cũ.</li>
+                                <li><code>value_name='Point'</code>: Tên của cột mới chứa giá trị số liệu tương ứng.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Chuyển đổi dữ liệu bằng melt</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Lấy 3 Pokemon đầu tiên với 2 chỉ số HP và Attack (Dạng rộng)
+wide_sample = df[['Name', 'HP', 'Attack']].head(3)
+print("--- 1. BẢNG DẠNG RỘNG BAN ĐẦU (WIDE FORMAT) ---")
+print(wide_sample)
+
+# Dùng melt chuyển sang Dạng dài (Long format)
+long_df = wide_sample.melt(
+    id_vars='Name',
+    var_name='Stat_Type',
+    value_name='Score'
+)
+
+print("\n--- 2. BẢNG DẠNG DÀI SAU KHI MELT (LONG / TIDY FORMAT) ---")
+print(long_df)</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- 1. BẢNG DẠNG RỘNG BAN ĐẦU (WIDE FORMAT) ---
+        Name  HP  Attack
+0  Bulbasaur  45      49
+1    Ivysaur  60      62
+2   Venusaur  80      82
+
+--- 2. BẢNG DẠNG DÀI SAU KHI MELT (LONG / TIDY FORMAT) ---
+        Name Stat_Type  Score
+0  Bulbasaur        HP     45
+1    Ivysaur        HP     60
+2   Venusaur        HP     80
+3  Bulbasaur    Attack     49
+4    Ivysaur    Attack     62
+5   Venusaur    Attack     82</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 30: PIVOT TABLE ==================== -->
+            <div class="slide" id="slide-30">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 9: Bảng Tổng Hợp Chéo</span>
+                    <h2 class="slide-title">Bảng Tổng Hợp Đa Chiều (Pivot Table)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>So Sánh Pivot Table Với GroupBy</h4>
+                            <p>Nếu bạn từng yêu thích tính năng Pivot Table trong Excel, thì
+                                <code>pd.pivot_table()</code> trong Pandas còn mạnh mẽ và linh hoạt hơn gấp bội!
+                            </p>
+
+                            <h4 style="margin-top: 14px;">4 Tham Số Cốt Lõi:</h4>
+                            <ul class="feature-list">
+                                <li><code>index='Type 1'</code>: Cột được dùng làm nhãn hàng dọc.</li>
+                                <li><code>columns='Legendary'</code>: Cột được dùng làm tiêu đề cột ngang.</li>
+                                <li><code>values='Attack'</code>: Cột dữ liệu cần đưa vào tính toán tổng hợp.</li>
+                                <li><code>aggfunc='mean'</code>: Hàm tính toán (mean, sum, count, median).</li>
+                                <li><code>margins=True</code>: <strong>Tính tổng biên</strong> tự động (Thêm cột và hàng
+                                    <code>All</code> tính tổng toàn bộ bảng).
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Tạo Pivot Table thống kê</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+
+# Tạo bảng thống kê đếm số lượng Pokemon theo Hệ và Trạng thái Huyền thoại
+pt = pd.pivot_table(
+    df,
+    index='Type 1',
+    columns='Legendary',
+    values='#',
+    aggfunc='count',
+    fill_value=0,
+    margins=True   # Thêm dòng và cột 'All' tính tổng
+)
+
+print("--- PIVOT TABLE SỐ LƯỢNG POKEMON (KÈM CỘT TỔNG ALL) ---")
+print(pt.head(6))</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- PIVOT TABLE SỐ LƯỢNG POKEMON (KÈM CỘT TỔNG ALL) ---
+Legendary  False  True   All
+Type 1                      
+Bug           69     0    69
+Dark          29     2    31
+Dragon        20    12    32
+Electric      40     4    44
+Fairy         16     1    17
+Fighting      27     0    27</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 31: BINNING WITH PD.CUT ==================== -->
+            <div class="slide" id="slide-31">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 9: Phân Nhóm Dữ Liệu</span>
+                    <h2 class="slide-title">Rời Rạc Hóa Biến Liên Tục (Binning Với <code>pd.cut</code>)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Ý Nghĩa Của Binning Trong Phân Tích &amp; ML</h4>
+                            <p>Nhiều bài toán kinh doanh yêu cầu phân khúc chỉ số liên tục thành các nhóm chất lượng
+                                (VD: Phân khúc thu nhập, Độ tuổi, Điểm tín dụng hoặc Cấp độ sức mạnh).</p>
+
+                            <h4 style="margin-top: 14px;">Cú Pháp Phương Thức <code>pd.cut()</code>:</h4>
+                            <ul class="feature-list">
+                                <li><code>bins=[0, 50, 100, 150, np.inf]</code>: Các ngưỡng chia ranh giới khoảng giá
+                                    trị.</li>
+                                <li><code>labels=['Yếu', 'Vừa', 'Mạnh', 'Cực Mạnh']</code>: Đặt nhãn tên gọi dễ hiểu cho
+                                    từng phân khúc.</li>
+                                <li>Tạo ra một cột kiểu <code>category</code> có thứ bậc (ordered categorical) cực kỳ
+                                    hoàn hảo cho Machine Learning!</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Phân loại cấp độ tấn công Pokemon</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+import numpy as np
+
+df = pd.read_csv('Pokemon.csv')
+
+# Chia Attack thành 4 cấp bậc sức mạnh
+df['Attack_Tier'] = pd.cut(
+    df['Attack'],
+    bins=[0, 50, 100, 150, np.inf],
+    labels=['Yeu', 'BinhThuong', 'Manh', 'CucManh']
+)
+
+# Thống kê số lượng Pokemon trong từng bậc sức mạnh
+tier_counts = df['Attack_Tier'].value_counts()
+
+print("--- PHÂN BỐ SỐ LƯỢNG THEO CẤP BẬC SỨC MẠNH ---")
+print(tier_counts)</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">--- PHÂN BỐ SỐ LƯỢNG THEO CẤP BẬC SỨC MẠNH ---
+Attack_Tier
+BinhThuong    460
+Yeu           170
+Manh          152
+CucManh        18
+Name: count, dtype: int64</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <strong>Phân tích tỷ lệ:</strong> Đa số Pokemon (460 con - 57.5%) có sức tấn công ở mức Bình
+                        Thường (50 - 100 điểm). Chỉ có vỏn vẹn 18 Pokemon đạt mức Cực Mạnh (> 150 điểm, chủ yếu là các
+                        dạng Mega và Huyền thoại).
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 32: DATA PROFILING ==================== -->
+            <div class="slide" id="slide-32">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 9: Báo Cáo Tự Động</span>
+                    <h2 class="slide-title">Khảo Sát Tự Động (Automated Profiling &amp; EDA)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Công Cụ Báo Cáo Tự Động Trong 1 Dòng Code</h4>
+                            <p>Thay vì phải tự viết hàng chục dòng code để kiểm tra từng biểu đồ, thư viện
+                                <code>ydata-profiling</code> (tiền thân là <code>pandas-profiling</code>) cho phép sinh
+                                toàn bộ báo cáo phân tích khám phá dữ liệu (EDA) tương tác dưới dạng HTML chỉ với duy
+                                nhất một dòng lệnh.
+                            </p>
+
+                            <h4 style="margin-top: 14px;">Báo Cáo Tự Động Bao Gồm:</h4>
+                            <ul class="feature-list">
+                                <li>Phân phối tần suất từng biến (Histogram, Bar chart).</li>
+                                <li>Cảnh báo thông minh: Cột có độ tương quan cao (multicollinearity), tỷ lệ missing
+                                    values cao, các giá trị trùng lặp (duplicates).</li>
+                                <li>Ma trận tương quan đa chỉ số: Pearson, Spearman, Phik.</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Sinh báo cáo ProfileReport</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python"># Cài đặt: pip install ydata-profiling
+import pandas as pd
+from ydata_profiling import ProfileReport
+
+df = pd.read_csv('Pokemon.csv')
+
+# Khởi tạo báo cáo tự động
+profile = ProfileReport(
+    df, 
+    title="Pokemon Comprehensive EDA Report",
+    explorative=True
+)
+
+# Xuất ra file HTML trực quan để trình bày cho sếp/khách hàng
+profile.to_file("pokemon_eda_report.html")
+print("Báo cáo phân tích tương tác đã được tạo thành công: pokemon_eda_report.html")</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Summarize dataset: 100%|██████████| 13/13 [00:02&lt;00:00,  5.84it/s]
+Generate report structure: 100%|██████████| 1/1 [00:00&lt;00:00, 12.50it/s]
+Render HTML: 100%|██████████| 1/1 [00:00&lt;00:00,  3.21it/s]
+Export report to file: 100%|██████████| 1/1 [00:00&lt;00:00, 10.02it/s]
+Báo cáo phân tích tương tác đã được tạo thành công: pokemon_eda_report.html</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 33: RANDOM TRAIN TEST SPLIT ==================== -->
+            <div class="slide" id="slide-33">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 10: Thực Chiến</span>
+                    <h2 class="slide-title">Tách Tập Dữ Liệu Ngẫu Nhiên (Train / Test Split Pattern)</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="grid-2col">
+                        <div class="content-box">
+                            <h4>Kỹ Thuật Tách Dữ Liệu Thuần Pandas</h4>
+                            <p>Trước khi đưa dữ liệu vào mô hình Machine Learning, chúng ta cần chia tập dữ liệu thành 2
+                                phần: Tập huấn luyện (Train Set) và Tập kiểm thử (Test Set). Nếu không muốn phụ thuộc
+                                vào Scikit-Learn, Pandas hỗ trợ sẵn giải pháp cực kỳ thanh lịch:</p>
+
+                            <ul class="feature-list">
+                                <li><strong>Bước 1: Lấy mẫu ngẫu nhiên tập Train:</strong>
+                                    <br><code>train_df = df.sample(frac=0.75, random_state=42)</code>
+                                    <br>Tham số <code>frac=0.75</code> nghĩa là lấy 75% dữ liệu,
+                                    <code>random_state=42</code> đảm bảo tính tái lập (reproducibility).
+                                </li>
+                                <li><strong>Bước 2: Lấy phần còn lại làm tập Test:</strong>
+                                    <br><code>test_df = df.drop(train_df.index)</code>
+                                    <br>Đơn giản chỉ cần loại bỏ các index đã được chọn trong tập Train!
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python • Tách tập Train / Test với sample</span>
+                                <div class="code-actions">
+                                    <button class="btn-code-action">Sao chép</button>
+                                </div>
+                            </div>
+                            <pre class="code-block"><code class="language-python">import pandas as pd
+
+df = pd.read_csv('Pokemon.csv')
+total_rows = len(df)
+
+# 1. Trích xuất 75% ngẫu nhiên cho tập Train
+train_df = df.sample(frac=0.75, random_state=42)
+
+# 2. Loại bỏ các dòng của Train để lấy 25% còn lại cho Test
+test_df = df.drop(train_df.index)
+
+print(f"Tổng số bản ghi ban đầu: {total_rows} dòng")
+print(f"Tập Train (75%):         {len(train_df)} dòng")
+print(f"Tập Test (25%):          {len(test_df)} dòng")
+print(f"Kiểm tra tính toàn vẹn:  {len(train_df) + len(test_df) == total_rows}")</code></pre>
+                            <div class="output-panel">
+                                <div class="output-header">OUTPUT TERMINAL</div>
+                                <pre class="output-content">Tổng số bản ghi ban đầu: 800 dòng
+Tập Train (75%):         600 dòng
+Tập Test (25%):          200 dòng
+Kiểm tra tính toàn vẹn:  True</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 34: QUIZZES PART 1 ==================== -->
+            <div class="slide" id="slide-34">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 10: Bài Tập Thực Chiến</span>
+                    <h2 class="slide-title">Bài Tập Thực Chiến</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="content-box" style="padding: 12px 16px;">
+                        <h4 style="margin-bottom: 6px;">Đề Bài Chi Tiết</h4>
+                        <div class="table-responsive">
+                            <table class="styled-table quiz-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 75px; text-align: center;">STT</th>
+                                        <th style="width: 48%;">Đề Bài Câu Hỏi</th>
+                                        <th>Cú Pháp Code Pandas Tối Ưu</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 01</span></td>
+                                        <td>Đọc file CSV có tên <code>"Pokemon.csv"</code> vào một Pandas DataFrame.
+                                        </td>
+                                        <td><code>df = pd.read_csv('Pokemon.csv')</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 02</span></td>
+                                        <td>Hiển thị 5 dòng dữ liệu đầu tiên của DataFrame.</td>
+                                        <td><code>df.head()</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 03</span></td>
+                                        <td>Hiển thị 3 dòng dữ liệu cuối cùng của DataFrame.</td>
+                                        <td><code>df.tail(3)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 04</span></td>
+                                        <td>Lấy danh sách tên của tất cả các cột trong DataFrame.</td>
+                                        <td><code>df.columns</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 05</span></td>
+                                        <td>Trích xuất các dòng từ chỉ số vị trí (index) 10 đến 15 (bao gồm cả dòng 15).
+                                        </td>
+                                        <td><code>df.iloc[10:16]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 06</span></td>
+                                        <td>Trích xuất riêng dòng dữ liệu tại chỉ số index 50.</td>
+                                        <td><code>df.iloc[50]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 07</span></td>
+                                        <td>Lọc DataFrame chỉ hiển thị các dòng có cột <code>'Type 1'</code> là
+                                            <code>'Grass'</code>.
+                                        </td>
+                                        <td><code>df[df['Type 1'] == 'Grass']</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 08</span></td>
+                                        <td>Lọc DataFrame chỉ hiển thị các Pokemon có chỉ số <code>'HP'</code> lớn hơn
+                                            100.</td>
+                                        <td><code>df[df['HP'] > 100]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 09</span></td>
+                                        <td>Lọc các Pokemon có tên chứa chuỗi con <code>'chu'</code> (không phân biệt
+                                            chữ hoa/thường).</td>
+                                        <td><code>df[df['Name'].str.contains('chu', case=False)]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 10</span></td>
+                                        <td>Sắp xếp DataFrame theo cột sức tấn công <code>'Attack'</code> theo thứ tự
+                                            giảm dần.</td>
+                                        <td><code>df.sort_values(by='Attack', ascending=False)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 11</span></td>
+                                        <td>Đặt lại chỉ mục (reset index) cho DataFrame và xóa bỏ cột index cũ.</td>
+                                        <td><code>df.reset_index(drop=True)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 12</span></td>
+                                        <td>Trích xuất danh sách các cột cụ thể: <code>'Name'</code>,
+                                            <code>'Type 1'</code> và <code>'HP'</code>.
+                                        </td>
+                                        <td><code>df[['Name', 'Type 1', 'HP']]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 13</span></td>
+                                        <td>Lọc các dòng thỏa mãn đồng thời <code>'Type 1' == 'Grass'</code> VÀ
+                                            <code>'Type 2' == 'Poison'</code>.
+                                        </td>
+                                        <td><code>df[(df['Type 1'] == 'Grass') &amp; (df['Type 2'] == 'Poison')]</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 14</span></td>
+                                        <td>Tính chỉ số HP trung bình của nhóm Pokemon Huyền thoại
+                                            (<code>Legendary == True</code>).</td>
+                                        <td><code>df[df['Legendary'] == True]['HP'].mean()</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 15</span></td>
+                                        <td>Tạo một DataFrame mới chỉ chứa các dòng có chỉ mục index là số chẵn.</td>
+                                        <td><code>df[df.index % 2 == 0]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 16</span></td>
+                                        <td>Lưu DataFrame vừa lọc ra file CSV mới có tên
+                                            <code>"filtered_pokemon.csv"</code> (bỏ cột index).
+                                        </td>
+                                        <td><code>df[df.index % 2 == 0].to_csv('filtered_pokemon.csv', index=False)</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 17</span></td>
+                                        <td>Hiển thị 10 dòng đầu (index 0 đến 9) cho 3 cột <code>'Name'</code>,
+                                            <code>'Type 1'</code>, <code>'Attack'</code> bằng <code>loc</code>.
+                                        </td>
+                                        <td><code>df.loc[:9, ['Name', 'Type 1', 'Attack']]</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 35: QUIZZES PART 2 ==================== -->
+            <div class="slide" id="slide-35">
+                <div class="slide-header">
+                    <span class="slide-tag">Chương 10: Bài Tập Thực Chiến</span>
+                    <h2 class="slide-title">Bài Tập Thực Chiến</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="content-box" style="padding: 12px 16px;">
+                        <h4 style="margin-bottom: 6px;">Đề Bài Chi Tiết</h4>
+                        <div class="table-responsive">
+                            <table class="styled-table quiz-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 75px; text-align: center;">STT</th>
+                                        <th style="width: 48%;">Đề Bài Câu Hỏi</th>
+                                        <th>Cú Pháp Code Pandas Tối Ưu</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 18</span></td>
+                                        <td>Tìm giá trị chỉ số phòng thủ (<code>'Defense'</code>) lớn nhất trong
+                                            DataFrame.</td>
+                                        <td><code>df['Defense'].max()</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 19</span></td>
+                                        <td>Tạo DataFrame mới gồm các Pokemon có tốc độ <code>'Speed'</code> cao hơn mức
+                                            Speed trung bình.</td>
+                                        <td><code>df[df['Speed'] > df['Speed'].mean()]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 20</span></td>
+                                        <td>Trích xuất 3 dòng đầu tiên (index 0 đến 2) và 2 cột <code>'Name'</code>,
+                                            <code>'Attack'</code>.
+                                        </td>
+                                        <td><code>df.loc[:2, ['Name', 'Attack']]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 21</span></td>
+                                        <td>Đếm số lượng Pokemon thuộc từng hệ trong cột <code>'Type 1'</code>.</td>
+                                        <td><code>df['Type 1'].value_counts()</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 22</span></td>
+                                        <td>Hiển thị các dòng có thế hệ <code>'Generation'</code> là 3 hoặc
+                                            <code>'Generation'</code> là 5.
+                                        </td>
+                                        <td><code>df[(df['Generation'] == 3) | (df['Generation'] == 5)]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 23</span></td>
+                                        <td>Thay thế tất cả giá trị <code>'Fire'</code> trong cột <code>'Type 1'</code>
+                                            thành <code>'Flame'</code>.</td>
+                                        <td><code>df.loc[df['Type 1'] == 'Fire', 'Type 1'] = 'Flame'</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 24</span></td>
+                                        <td>Hiển thị các dòng có tên Pokemon bắt đầu bằng ký tự <code>'P'</code>.</td>
+                                        <td><code>df[df['Name'].str.startswith('P')]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 25</span></td>
+                                        <td>Tính giá trị sức tấn công <code>'Attack'</code> trung bình cho từng hệ
+                                            <code>'Type 1'</code>.
+                                        </td>
+                                        <td><code>df.groupby('Type 1')['Attack'].mean()</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 26</span></td>
+                                        <td>Sắp xếp DataFrame theo <code>'Type 1'</code> tăng dần (A-Z) và
+                                            <code>'Attack'</code> giảm dần.
+                                        </td>
+                                        <td><code>df.sort_values(by=['Type 1', 'Attack'], ascending=[True, False])</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 27</span></td>
+                                        <td>Tính giá trị trung vị (median) của chỉ số <code>'Defense'</code> cho từng hệ
+                                            <code>'Type 1'</code>.
+                                        </td>
+                                        <td><code>df.groupby('Type 1')['Defense'].median()</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 28</span></td>
+                                        <td>Lọc các Pokemon Huyền thoại (<code>'Legendary' == True</code>) có chỉ số
+                                            <code>'Attack' > 100</code>.
+                                        </td>
+                                        <td><code>df[(df['Legendary'] == True) &amp; (df['Attack'] > 100)]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 29</span></td>
+                                        <td>Tạo DataFrame mới chỉ gồm cột <code>'Name'</code>, <code>'Total'</code> và
+                                            đổi tên <code>'Total'</code> thành <code>'Overall'</code>.</td>
+                                        <td><code>df.loc[:, ['Name', 'Total']].rename(columns={'Total': 'Overall'})</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 30</span></td>
+                                        <td>Hiển thị các dòng có <code>'Type 1' == 'Water'</code> và chỉ số
+                                            <code>'Attack' &gt;= 80</code>.
+                                        </td>
+                                        <td><code>df[(df['Type 1'] == 'Water') &amp; (df['Attack'] >= 80)]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 31</span></td>
+                                        <td>Tạo DataFrame mới chỉ gồm 2 cột <code>'Name'</code> và
+                                            <code>'Defense'</code> cho Pokemon Gen 4.
+                                        </td>
+                                        <td><code>df[df['Generation'] == 4][['Name', 'Defense']]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 32</span></td>
+                                        <td>Tính chỉ số <code>'Total'</code> trung bình cho từng cặp kết hợp hệ
+                                            <code>'Type 1'</code> và <code>'Type 2'</code>.
+                                        </td>
+                                        <td><code>df.groupby(['Type 1', 'Type 2'])['Total'].mean()</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><span class="badge-stt">Câu 33</span></td>
+                                        <td>Lọc Pokemon có tổng điểm <code>'Total'</code> trong khoảng từ 400 đến 500
+                                            (bao gồm cả 400 và 500).</td>
+                                        <td><code>df[(df['Total'] >= 400) &amp; (df['Total'] <= 500)]</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 36: BEST PRACTICES ==================== -->
+            <div class="slide" id="slide-36">
+                <div class="slide-header">
+                    <span class="slide-tag">Tổng Kết &amp; Lời Khuyên</span>
+                    <h2 class="slide-title">7 Lời Khuyên "Vàng" Khi Làm Việc Với Pandas Trong Thực Tế</h2>
+                </div>
+                <div class="slide-body">
+                    <div class="content-box">
+                        <ul class="feature-list" style="gap: 14px;">
+                            <li><strong>1. Tránh xa vòng lặp lồng nhau <code>for row in df.iterrows()</code>:</strong>
+                                Vòng lặp phá vỡ cơ chế C-speed của Pandas. Luôn tìm kiếm giải pháp Vectorization hoặc
+                                <code>df.apply()</code> để tăng tốc độ gấp 100 lần.
+                            </li>
+                            <li><strong>2. Luôn chủ động tối ưu dung lượng RAM:</strong> Kiểm tra bằng
+                                <code>df.info(memory_usage='deep')</code> và chuyển các cột dạng phân loại sang kiểu
+                                <code>category</code> để tiết kiệm 50% - 90% bộ nhớ.
+                            </li>
+                            <li><strong>3. Nhớ kỹ sự khác biệt giữa <code>loc</code> và <code>iloc</code>:</strong>
+                                <code>iloc[0:4]</code> loại trừ vị trí 4 (lấy 4 dòng), nhưng <code>loc[0:4]</code> bao
+                                gồm cả nhãn 4 (lấy 5 dòng).
+                            </li>
+                            <li><strong>4. Hiểu rõ View vs Copy để tránh <code>SettingWithCopyWarning</code>:</strong>
+                                Không gán giá trị theo kiểu chuỗi <code>df[cond]['col'] = val</code>, hãy luôn dùng cú
+                                pháp chuẩn <code>df.loc[cond, 'col'] = val</code>.</li>
+                            <li><strong>5. Đọc dữ liệu lớn bằng kỹ thuật Chunks &amp; Usecols:</strong> Đừng nạp toàn bộ
+                                file 10GB vào RAM nếu bạn chỉ cần 3 cột và có thể xử lý từng mẻ bằng
+                                <code>chunksize</code>.
+                            </li>
+                            <li><strong>6. Luôn xử lý Missing Values (NaN) trước khi mô hình hóa:</strong> Các thuật
+                                toán Scikit-Learn sẽ báo lỗi nếu gặp giá trị khuyết thiếu. Hãy quyết định
+                                <code>dropna()</code>, <code>fillna()</code> hoặc <code>interpolate()</code> một cách
+                                khoa học.
+                            </li>
+                            <li><strong>7. Sử dụng Method Chaining:</strong> Nối chuỗi các phương thức
+                                <code>(df.query(...).assign(...).groupby(...).mean())</code> để viết mã nguồn trong
+                                sáng, sạch đẹp và chuẩn phong cách functional programming.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== SLIDE 37: CONCLUSION ==================== -->
+            <div class="slide hero-slide" id="slide-37">
+                <div class="hero-logos">
+                    <div class="hero-logo-card"><img src="Logo NEU.png" alt="NEU Logo" class="hero-logo-img"></div>
+                    <div class="hero-logo-card hero-logo-card-main"><img src="Logo TCC.png" alt="TCC Logo"
+                            class="hero-logo-img hero-logo-main"></div>
+                    <div class="hero-logo-card"><img src="Logo IT.png" alt="IT Logo" class="hero-logo-img"></div>
+                </div>
+                <div class="hero-org-tag">THE CODIATION CLUB • KHOA CÔNG NGHỆ THÔNG TIN - NEU</div>
+                <h1 class="hero-title">CHÚC MỪNG BẠN ĐÃ HOÀN THÀNH!</h1>
+                <p class="hero-subtitle">
+                    Bạn Đã Nắm Vững Toàn Bộ Nền Tảng &amp; Kỹ Thuật Nâng Cao Của Thư Viện Pandas. Sẵn Sàng Bước Vào Thế
+                    Giới Khoa Học Dữ Liệu &amp; Machine Learning Chuyên Sâu!
+                </p>
+                <div class="hero-meta">
+                    <span class="hero-chip">Chuyên đề: Pandas &amp; Data Wrangling</span>
+                    <span class="hero-chip">CLB: The Codiation Club (TCC) - NEU</span>
+                    <span class="hero-chip">Khoa Công Nghệ Thông Tin (NEU IT)</span>
+                </div>
+                <button class="btn-primary btn-hero-start" onclick="document.getElementById('first-btn').click()">
+                    Quay Về Slide Đầu Tiên
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Bottom Control Bar -->
+        <div class="bottom-controls">
+            <div class="nav-buttons">
+                <button id="first-btn" class="btn-icon">Đầu</button>
+                <button id="prev-btn" class="btn-icon">Trước</button>
+            </div>
+            <div id="slide-counter" class="slide-counter">1 / 37</div>
+            <div class="nav-buttons">
+                <button id="next-btn" class="btn-primary">Sau</button>
+                <button id="last-btn" class="btn-icon">Cuối</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal TOC Drawer -->
+    <div id="toc-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 class="modal-title">Danh Mục Slide Bài Giảng Pandas Masterclass</h3>
+                <button id="close-modal" class="btn-icon">Đóng</button>
+            </div>
+            <div class="modal-search">
+                <input type="text" id="search-input" class="search-input"
+                    placeholder="Nhập từ khóa để tìm kiếm slide...">
+            </div>
+            <div id="toc-container" class="modal-content">
+                <!-- Dynamically populated by script.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+</body>
+
+</html>
